@@ -1,0 +1,22 @@
+diary package
+=============
+
+Submodules
+----------
+
+diary.daily module
+------------------
+
+.. automodule:: daily
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+diary.monthly module
+--------------------
+
+.. automodule:: monthly
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
