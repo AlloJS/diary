@@ -6,54 +6,9 @@ except ImportError:
 import datetime
 import calendar
 from dateutil import tz
+import time
 
-class DialyEvent:
-    def __init__(self,name,description,year,month,day,hour,minute,do):
-        """
-
-        :param name:
-        :param description:
-        :param year:
-        :param month:
-        :param day:
-        :param hour:
-        :param minute:
-        :param do:
-        """
-
-        self.name = name
-        self.description = description
-        self.year = year
-        self.month = month
-        self.day = day
-        self.hour = hour
-        self.minute = minute
-        self.do = do
-
-    def __str__(self):
-        pass
-
-    def put_event_diary(self,diary:list):
-        time_zone = tz.gettz('Europe/Paris')
-        date_event = datetime.datetime(self.year,self.month,self.day,self.hour,self.minute,0,tzinfo=time_zone)
-        month_calendar = calendar.month(self.year,self.month)
-
-        dict_event = {
-            'name':self.name,
-            'description':self.description,
-            'date': date_event,
-            'do': self.do,
-            'repeat': False,
-            'calendar':month_calendar
-        }
-
-        diary.append(dict_event)
-        return diary
-
-
-
-
-def daily_note(name,description,year,month,day,hour,minute,do):
+def daily_note(name,description,year,month,day,hour,minute,minut_duration,do):
     """
     Crea una voce di diario per una data specifica.
 
@@ -71,6 +26,8 @@ def daily_note(name,description,year,month,day,hour,minute,do):
     :type name: str
     :param description: Descrizione della voce del diario.
     :type description: str
+    :param minut_duration: Imposta la durata in minuti dell'evento.
+    :type minut_duration: int
     :param do: Stato della voce del diario (True o False).
     :type do: bool
     :return: Un dizionario che rappresenta la voce del diario, contenente la data formattata, la descrizione, lo stato e il calendario del mese.
@@ -86,12 +43,15 @@ def daily_note(name,description,year,month,day,hour,minute,do):
 
         time_zone = tz.gettz('Europe/Paris')
         d_d = datetime.datetime(year, month, day,hour,minute,0, tzinfo=time_zone)
-        date_diary = datetime.datetime.strftime(d_d, '%Y-%m-%d %H:%M:%S')
+        date_start = datetime.datetime.strftime(d_d, '%Y-%m-%d %H:%M:%S')
+        d_e = d_d + datetime.timedelta(minutes=minut_duration)
+        date_end = datetime.datetime.strftime(d_e,'%Y-%m-%d %H:%M:%S')
 
         obj_diary = {
             'name': name,
             'description': description,
-            'date': date_diary,
+            'date start': date_start,
+            'date end': date_end,
             'do': do,
             'repeat': False,
             'calendar': calendar.month(year, month)
@@ -102,7 +62,7 @@ def daily_note(name,description,year,month,day,hour,minute,do):
     except ErrorDate as ed:
         print(ed.message)
 
-def modify_daily_date(obj_daily, year, month, day,hour,minute):
+def modify_daily_date(obj_daily, year, month, day,hour,minute,minut_duration):
     """
     Modifica la data di una voce di diario esistente.
 
@@ -118,6 +78,8 @@ def modify_daily_date(obj_daily, year, month, day,hour,minute):
     :type hour: int
     :param minute: Nuovi minuti da impostare (1-31).
     :type minute: int
+    :param minut_duration: Imposta la durata in minuti dell'evento.
+    :type minut_duration: int
     :return: L'oggetto della voce del diario modificato.
     :rtype: dict
     :raises ErrorDate: Se il mese o il giorno non sono validi.
@@ -132,8 +94,11 @@ def modify_daily_date(obj_daily, year, month, day,hour,minute):
         time_zone = tz.gettz('Europe/Paris')
         d_d = datetime.datetime(year, month, day,hour,minute,0,tzinfo=time_zone)
         date_diary = datetime.datetime.strftime(d_d, '%Y-%m-%d %H:%M:%S')
+        d_e = d_d + datetime.timedelta(minutes=minut_duration)
+        date_end = datetime.datetime.strftime(d_e, '%Y-%m-%d %H:%M:%S')
         obj_daily['calendar'] = calendar.month(year, month)
-        obj_daily['date'] = date_diary
+        obj_daily['date start'] = date_diary
+        obj_daily['date end'] = date_end
         return obj_daily
 
     except ErrorDate as ed:
