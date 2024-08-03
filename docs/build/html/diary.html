@@ -39,6 +39,17 @@
 </section>
 <section id="module-diary.daily">
 <span id="diary-daily-module"></span><h2>diary.daily module<a class="headerlink" href="#module-diary.daily" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="diary.daily.DialyEvent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">DialyEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.DialyEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.daily.DialyEvent.put_event_diary">
+<span class="sig-name descname"><span class="pre">put_event_diary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.DialyEvent.put_event_diary" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.convert_daily_to_string">
 <span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">convert_daily_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.convert_daily_to_string" title="Link to this definition">¶</a></dt>
@@ -58,7 +69,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.daily_note">
-<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">daily_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.daily_note" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">daily_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.daily_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per una data specifica.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -66,6 +77,9 @@
 <li><p><strong>year</strong> (<em>int</em>) – Anno della data del diario.</p></li>
 <li><p><strong>month</strong> (<em>int</em>) – Mese della data del diario (1-12).</p></li>
 <li><p><strong>day</strong> (<em>int</em>) – Giorno della data del diario (1-31).</p></li>
+<li><p><strong>hour</strong> (<em>int</em>) – Ora della data del diario (1-31).</p></li>
+<li><p><strong>minute</strong> (<em>int</em>) – Minuti della data del diario (1-31).</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Nome della voce del diario.</p></li>
 <li><p><strong>description</strong> (<em>str</em>) – Descrizione della voce del diario.</p></li>
 <li><p><strong>do</strong> (<em>bool</em>) – Stato della voce del diario (True o False).</p></li>
 </ul>
@@ -84,7 +98,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.modify_daily_date">
-<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">modify_daily_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.modify_daily_date" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">modify_daily_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.modify_daily_date" title="Link to this definition">¶</a></dt>
 <dd><p>Modifica la data di una voce di diario esistente.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -93,6 +107,8 @@
 <li><p><strong>year</strong> (<em>int</em>) – Nuovo anno da impostare.</p></li>
 <li><p><strong>month</strong> (<em>int</em>) – Nuovo mese da impostare (1-12).</p></li>
 <li><p><strong>day</strong> (<em>int</em>) – Nuovo giorno da impostare (1-31).</p></li>
+<li><p><strong>hour</strong> (<em>int</em>) – Nuova ora da impostare (1-31).</p></li>
+<li><p><strong>minute</strong> (<em>int</em>) – Nuovi minuti da impostare (1-31).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -262,6 +278,30 @@
 </dd></dl>
 
 </section>
+<section id="module-diary.new_diary">
+<span id="diary-new-diary-module"></span><h2>diary.new_diary module<a class="headerlink" href="#module-diary.new_diary" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="diary.new_diary.Diary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.new_diary.</span></span><span class="sig-name descname"><span class="pre">Diary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.new_diary.Diary" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Costruzione di un nuovo diario per la registrazione degli eventi</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.new_diary.Diary.put_event_diary">
+<span class="sig-name descname"><span class="pre">put_event_diary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.new_diary.Diary.put_event_diary" title="Link to this definition">¶</a></dt>
+<dd><p>Inserimento eventi nel diario</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> – Oggetto evento da inserrire nel diario</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ritorna il diario con l’oggetto inserito alla fine degli altri eventi esistenti</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-diary.period">
 <span id="diary-period-module"></span><h2>diary.period module<a class="headerlink" href="#module-diary.period" title="Link to this heading">¶</a></h2>
 <dl class="py function">
@@ -360,6 +400,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.daily">diary.daily module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.diary_except">diary.diary_except module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.monthly">diary.monthly module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-diary.new_diary">diary.new_diary module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.period">diary.period module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary">Module contents</a></li>
 </ul>

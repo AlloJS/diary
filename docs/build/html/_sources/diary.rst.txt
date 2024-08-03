@@ -28,6 +28,14 @@ diary.monthly module
    :undoc-members:
    :show-inheritance:
 
+diary.new\_diary module
+-----------------------
+
+.. automodule:: diary.new_diary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 diary.period module
 -------------------
 
