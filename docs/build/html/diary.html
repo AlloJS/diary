@@ -40,14 +40,18 @@
 <section id="module-diary.daily">
 <span id="diary-daily-module"></span><h2>diary.daily module<a class="headerlink" href="#module-diary.daily" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="diary.daily.convert_obj_to_string">
-<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">convert_obj_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.convert_obj_to_string" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dt class="sig sig-object py" id="diary.daily.convert_daily_to_string">
+<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">convert_daily_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.convert_daily_to_string" title="Link to this definition">¶</a></dt>
+<dd><p>Converte una voce di diario in una stringa formattata.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>obj_daily</strong></p>
+<dd class="field-odd"><p><strong>obj_daily</strong> (<em>dict</em>) – Oggetto della voce del diario da convertire.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p></p>
+<dd class="field-even"><p>Una stringa che rappresenta la voce del diario.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -55,18 +59,25 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.daily_note">
 <span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">daily_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.daily_note" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Crea una voce di diario per una data specifica.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>year</strong> – year of date daily diary</p></li>
-<li><p><strong>month</strong> – month of date daily diary</p></li>
-<li><p><strong>day</strong> – day of date daily diary</p></li>
-<li><p><strong>description</strong> – description of daily diary</p></li>
-<li><p><strong>do</strong> – do of daily diary and to be True of False</p></li>
+<li><p><strong>year</strong> (<em>int</em>) – Anno della data del diario.</p></li>
+<li><p><strong>month</strong> (<em>int</em>) – Mese della data del diario (1-12).</p></li>
+<li><p><strong>day</strong> (<em>int</em>) – Giorno della data del diario (1-31).</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Descrizione della voce del diario.</p></li>
+<li><p><strong>do</strong> (<em>bool</em>) – Stato della voce del diario (True o False).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Return a string of daily diary</p>
+<dd class="field-even"><p>Un dizionario che rappresenta la voce del diario, contenente la data formattata, la descrizione, lo stato e il calendario del mese.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#diary.diary_except.ErrorDate" title="diary.diary_except.ErrorDate"><strong>ErrorDate</strong></a> – Se il mese o il giorno non sono validi.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -74,33 +85,44 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.modify_daily_date">
 <span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">modify_daily_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.modify_daily_date" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Modifica la data di una voce di diario esistente.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>obj_daily</strong> – Objec daily diary to modify</p></li>
-<li><p><strong>year</strong> – new year to change</p></li>
-<li><p><strong>month</strong> – new month to change</p></li>
-<li><p><strong>day</strong> – new day to change</p></li>
+<li><p><strong>obj_daily</strong> (<em>dict</em>) – Oggetto della voce del diario da modificare.</p></li>
+<li><p><strong>year</strong> (<em>int</em>) – Nuovo anno da impostare.</p></li>
+<li><p><strong>month</strong> (<em>int</em>) – Nuovo mese da impostare (1-12).</p></li>
+<li><p><strong>day</strong> (<em>int</em>) – Nuovo giorno da impostare (1-31).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Object diary modify</p>
+<dd class="field-even"><p>L’oggetto della voce del diario modificato.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#diary.diary_except.ErrorDate" title="diary.diary_except.ErrorDate"><strong>ErrorDate</strong></a> – Se il mese o il giorno non sono validi.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="diary.daily.modify_desription_daily">
-<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">modify_desription_daily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.modify_desription_daily" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dt class="sig sig-object py" id="diary.daily.modify_description_daily">
+<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">modify_description_daily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.modify_description_daily" title="Link to this definition">¶</a></dt>
+<dd><p>Modifica la descrizione di una voce di diario esistente.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>obj_daily</strong> – Object daily to modify</p></li>
-<li><p><strong>description</strong> – New description to change</p></li>
+<li><p><strong>obj_daily</strong> (<em>dict</em>) – Oggetto della voce del diario da modificare.</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Nuova descrizione da impostare.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Object daily modify</p>
+<dd class="field-even"><p>L’oggetto della voce del diario modificato.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -108,12 +130,16 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.switch_do_daily">
 <span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">switch_do_daily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.switch_do_daily" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Cambia lo stato ‘do’ di una voce di diario (da True a False o viceversa).</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>obj_daily</strong> – Object daily to modify</p>
+<dd class="field-odd"><p><strong>obj_daily</strong> (<em>dict</em>) – Oggetto della voce del diario da modificare.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Object daily modify to do</p>
+<dd class="field-even"><p>L’oggetto della voce del diario modificato con lo stato ‘do’ aggiornato.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -130,6 +156,165 @@
 </section>
 <section id="module-diary.monthly">
 <span id="diary-monthly-module"></span><h2>diary.monthly module<a class="headerlink" href="#module-diary.monthly" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.monthly.convert_monthly_to_string">
+<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">convert_monthly_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.convert_monthly_to_string" title="Link to this definition">¶</a></dt>
+<dd><p>Converte una voce di diario monthly in una stringa formattata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj_daily</strong> (<em>dict</em>) – Oggetto della voce del diario da convertire.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Una stringa che rappresenta la voce del diario.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.monthly.modify_monthly_description">
+<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">modify_monthly_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_monthly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.modify_monthly_description" title="Link to this definition">¶</a></dt>
+<dd><p>Modifica la descrizione di una voce di diario mensile esistente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj_monthly</strong> (<em>dict</em>) – Oggetto della voce del diario da modificare.</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Nuova descrizione da impostare.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>L’oggetto della voce del diario monthly modificato.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.monthly.modify_monthly_month">
+<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">modify_monthly_month</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_monthly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.modify_monthly_month" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Modifica il mese e l’anno di una voce di diario esistente.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj_monthly</strong> (<em>dict</em>) – Oggetto della voce del diario da modificare.</p></li>
+<li><p><strong>year</strong> (<em>int</em>) – Nuovo anno da impostare.</p></li>
+<li><p><strong>month</strong> (<em>int</em>) – Nuovo mese da impostare (1-12).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>L’oggetto della voce del diario modificato.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#diary.diary_except.ErrorDate" title="diary.diary_except.ErrorDate"><strong>ErrorDate</strong></a> – Se il mese o il giorno non sono validi.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.monthly.monthly_note">
+<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">monthly_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.monthly_note" title="Link to this definition">¶</a></dt>
+<dd><p>Crea una voce di diario per un mese specifico.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> (<em>int</em>) – Anno della data del diario.</p></li>
+<li><p><strong>month</strong> (<em>int</em>) – Mese della data del diario (1-12).</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – Descrizione della voce del diario.</p></li>
+<li><p><strong>do</strong> (<em>bool</em>) – Stato della voce del diario (True o False).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Un dizionario che rappresenta la voce del diario, contenente il mese e l’anno formattati, la descrizione, lo stato e il calendario del mese.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#diary.diary_except.ErrorDate" title="diary.diary_except.ErrorDate"><strong>ErrorDate</strong></a> – Se il mese o il giorno non sono validi.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.monthly.switch_do_monthly">
+<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">switch_do_monthly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_monthly</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.switch_do_monthly" title="Link to this definition">¶</a></dt>
+<dd><p>Cambia lo stato ‘do’ di una voce di diario (da True a False o viceversa).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj_monthly</strong> (<em>dict</em>) – Oggetto della voce del diario da modificare.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>L’oggetto della voce del diario modificato con lo stato ‘do’ aggiornato.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-diary.period">
+<span id="diary-period-module"></span><h2>diary.period module<a class="headerlink" href="#module-diary.period" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.period.get_period_from">
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">get_period_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#diary.period.get_period_from" title="Link to this definition">¶</a></dt>
+<dd><p>Creazione del dict periodo di partenza</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> – Anno del periodo di partenza</p></li>
+<li><p><strong>month</strong> – Mese del periodo di partenza</p></li>
+<li><p><strong>day</strong> – Giorno del periodo di partenza</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ritora un dict del periodo di partenza</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.period.get_period_to">
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">get_period_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#diary.period.get_period_to" title="Link to this definition">¶</a></dt>
+<dd><p>Creazione del dict periodo di fine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>year</strong> – Anno del periodo di fine</p></li>
+<li><p><strong>month</strong> – Mese del periodo di fine</p></li>
+<li><p><strong>day</strong> – Giorno del periodo di fine</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ritora un dict del periodo di fine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.period.period_note">
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">period_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.period_note" title="Link to this definition">¶</a></dt>
+<dd><p>Crea una voce di diario per un periodo specifico.
+:param period_from: Data per periodo di partenza
+:type dict
+:param period_to: Data per periodo di fine
+:type dict
+:param description: Descrizione dell’evento del periodo
+:type str
+:param do: Stato della voce del diario (True o False).
+:type Bool
+:return: Ritorna un evento scelto in un certo periodo</p>
+</dd></dl>
+
 </section>
 <section id="module-diary">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-diary" title="Link to this heading">¶</a></h2>
@@ -175,6 +360,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.daily">diary.daily module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.diary_except">diary.diary_except module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.monthly">diary.monthly module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-diary.period">diary.period module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary">Module contents</a></li>
 </ul>
 </li>
