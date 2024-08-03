@@ -7,83 +7,114 @@ import datetime
 import calendar
 from dateutil import tz
 
-def daily_note(year,month,day,description,do):
-    '''
-           :param year: year of date daily diary
-           :param month: month of date daily diary
-           :param day: day of date daily diary
-           :param description: description of daily diary
-           :param do: do of daily diary and to be True of False
-           :return: Return a string of daily diary
-    '''
+def daily_note(year, month, day, description, do):
+    """
+    Crea una voce di diario per una data specifica.
+
+    :param year: Anno della data del diario.
+    :type year: int
+    :param month: Mese della data del diario (1-12).
+    :type month: int
+    :param day: Giorno della data del diario (1-31).
+    :type day: int
+    :param description: Descrizione della voce del diario.
+    :type description: str
+    :param do: Stato della voce del diario (True o False).
+    :type do: bool
+    :return: Un dizionario che rappresenta la voce del diario, contenente la data formattata, la descrizione, lo stato e il calendario del mese.
+    :rtype: dict
+    :raises ErrorDate: Se il mese o il giorno non sono validi.
+    """
     try:
-        if month not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]:
-            raise ErrorDate('Month is not real')
+        if month not in range(1, 13):
+            raise ErrorDate('Il mese non è valido.')
 
-        if day not in range(1,31):
-            raise ErrorDate('Day is not real')
-
-        time_zone = tz.gettz('Europe/Paris')
-        d_d = datetime.datetime(year,month,day,tzinfo=time_zone)
-        date_diary = datetime.datetime.strftime(d_d,'%Y-%m-%d %H:%M:%S')
-        obj_diary = {'date':date_diary,'description':description,'do':do,'calendar':calendar.month(year,month)}
-        return obj_diary
-    except ErrorDate as ed:
-        print(ed.message)
-
-
-def modify_daily_date(obj_daily,year,month,day):
-    '''
-        :param obj_daily: Objec daily diary to modify
-        :param year: new year to change
-        :param month: new month to change
-        :param day: new day to change
-        :return: Object diary modify
-    '''
-    try:
-        if month not in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]:
-            raise ErrorDate('Month is not real')
-
-        if day not in range(1,31):
-            raise ErrorDate('Day is not real')
+        if day not in range(1, 32):
+            raise ErrorDate('Il giorno non è valido.')
 
         time_zone = tz.gettz('Europe/Paris')
         d_d = datetime.datetime(year, month, day, tzinfo=time_zone)
         date_diary = datetime.datetime.strftime(d_d, '%Y-%m-%d %H:%M:%S')
-        obj_daily['calendar']= calendar.month(year,month)
+        obj_diary = {
+            'date': date_diary,
+            'description': description,
+            'do': do,
+            'calendar': calendar.month(year, month)
+        }
+        return obj_diary
+    except ErrorDate as ed:
+        print(ed.message)
+
+def modify_daily_date(obj_daily, year, month, day):
+    """
+    Modifica la data di una voce di diario esistente.
+
+    :param obj_daily: Oggetto della voce del diario da modificare.
+    :type obj_daily: dict
+    :param year: Nuovo anno da impostare.
+    :type year: int
+    :param month: Nuovo mese da impostare (1-12).
+    :type month: int
+    :param day: Nuovo giorno da impostare (1-31).
+    :type day: int
+    :return: L'oggetto della voce del diario modificato.
+    :rtype: dict
+    :raises ErrorDate: Se il mese o il giorno non sono validi.
+    """
+    try:
+        if month not in range(1, 13):
+            raise ErrorDate('Il mese non è valido.')
+
+        if day not in range(1, 32):
+            raise ErrorDate('Il giorno non è valido.')
+
+        time_zone = tz.gettz('Europe/Paris')
+        d_d = datetime.datetime(year, month, day, tzinfo=time_zone)
+        date_diary = datetime.datetime.strftime(d_d, '%Y-%m-%d %H:%M:%S')
+        obj_daily['calendar'] = calendar.month(year, month)
         obj_daily['date'] = date_diary
         return obj_daily
     except ErrorDate as ed:
         print(ed.message)
 
-def modify_desription_daily(obj_daily,description):
-    '''
-        :param obj_daily: Object daily to modify
-        :param description: New description to change
-        :return: Object daily modify
-    '''
+def modify_description_daily(obj_daily, description):
+    """
+    Modifica la descrizione di una voce di diario esistente.
+
+    :param obj_daily: Oggetto della voce del diario da modificare.
+    :type obj_daily: dict
+    :param description: Nuova descrizione da impostare.
+    :type description: str
+    :return: L'oggetto della voce del diario modificato.
+    :rtype: dict
+    """
     obj_daily['description'] = description
     return obj_daily
 
 def switch_do_daily(obj_daily):
-    '''
-        :param obj_daily: Object daily to modify
-        :return: Object daily modify to do
-    '''
-    if obj_daily['do'] == True:
-        obj_daily['do'] = False
-    else:
-        obj_daily['do'] = True
+    """
+    Cambia lo stato 'do' di una voce di diario (da True a False o viceversa).
 
-def convert_obj_to_string(obj_daily):
-    '''
-    :param obj_daily:
-    :return:
-    '''
-    str_daily = (f"{obj_daily['calendar']}\n"
-                 f"{obj_daily['date']}:\n{obj_daily['description']}\n"
-                 f"Do: {obj_daily['do']}")
+    :param obj_daily: Oggetto della voce del diario da modificare.
+    :type obj_daily: dict
+    :return: L'oggetto della voce del diario modificato con lo stato 'do' aggiornato.
+    :rtype: dict
+    """
+    obj_daily['do'] = not obj_daily['do']
+    return obj_daily
 
+def convert_daily_to_string(obj_daily):
+    """
+    Converte una voce di diario in una stringa formattata.
+
+    :param obj_daily: Oggetto della voce del diario da convertire.
+    :type obj_daily: dict
+    :return: Una stringa che rappresenta la voce del diario.
+    :rtype: str
+    """
+    str_daily = (
+        f"{obj_daily['calendar']}\n"
+        f"{obj_daily['date']}:\n{obj_daily['description']}\n"
+        f"Do: {obj_daily['do']}"
+    )
     return str_daily
-
-
