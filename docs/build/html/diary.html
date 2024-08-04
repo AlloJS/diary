@@ -39,17 +39,6 @@
 </section>
 <section id="module-diary.daily">
 <span id="diary-daily-module"></span><h2>diary.daily module<a class="headerlink" href="#module-diary.daily" title="Link to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="diary.daily.DialyEvent">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">DialyEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.DialyEvent" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="diary.daily.DialyEvent.put_event_diary">
-<span class="sig-name descname"><span class="pre">put_event_diary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.DialyEvent.put_event_diary" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.convert_daily_to_string">
 <span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">convert_daily_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.convert_daily_to_string" title="Link to this definition">¶</a></dt>
@@ -69,7 +58,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.daily_note">
-<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">daily_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.daily_note" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">daily_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minut_duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.daily_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per una data specifica.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -81,6 +70,7 @@
 <li><p><strong>minute</strong> (<em>int</em>) – Minuti della data del diario (1-31).</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – Nome della voce del diario.</p></li>
 <li><p><strong>description</strong> (<em>str</em>) – Descrizione della voce del diario.</p></li>
+<li><p><strong>minut_duration</strong> (<em>int</em>) – Imposta la durata in minuti dell’evento.</p></li>
 <li><p><strong>do</strong> (<em>bool</em>) – Stato della voce del diario (True o False).</p></li>
 </ul>
 </dd>
@@ -98,7 +88,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.modify_daily_date">
-<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">modify_daily_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.modify_daily_date" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">modify_daily_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minut_duration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.modify_daily_date" title="Link to this definition">¶</a></dt>
 <dd><p>Modifica la data di una voce di diario esistente.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -109,6 +99,7 @@
 <li><p><strong>day</strong> (<em>int</em>) – Nuovo giorno da impostare (1-31).</p></li>
 <li><p><strong>hour</strong> (<em>int</em>) – Nuova ora da impostare (1-31).</p></li>
 <li><p><strong>minute</strong> (<em>int</em>) – Nuovi minuti da impostare (1-31).</p></li>
+<li><p><strong>minut_duration</strong> (<em>int</em>) – Imposta la durata in minuti dell’evento.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -237,7 +228,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.monthly.monthly_note">
-<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">monthly_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.monthly_note" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">monthly_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.monthly_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per un mese specifico.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -306,52 +297,52 @@
 <span id="diary-period-module"></span><h2>diary.period module<a class="headerlink" href="#module-diary.period" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.period.get_period_from">
-<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">get_period_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#diary.period.get_period_from" title="Link to this definition">¶</a></dt>
-<dd><p>Creazione del dict periodo di partenza</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>year</strong> – Anno del periodo di partenza</p></li>
-<li><p><strong>month</strong> – Mese del periodo di partenza</p></li>
-<li><p><strong>day</strong> – Giorno del periodo di partenza</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Ritora un dict del periodo di partenza</p>
-</dd>
-</dl>
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">get_period_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#diary.period.get_period_from" title="Link to this definition">¶</a></dt>
+<dd><p>Creazione del dict periodo di partenza
+:param year: Anno del periodo di partenza
+:type year int
+:param month: Mese del periodo di partenza
+:type month int
+:param day: Giorno del periodo di partenza
+:type day int
+:param hour: Ora del periodo di partenza
+:type hour int
+:param minute: Minuti del periodo di partenza
+:type minute int
+:return: Ritora un dict del periodo di partenza</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.period.get_period_to">
-<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">get_period_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#diary.period.get_period_to" title="Link to this definition">¶</a></dt>
-<dd><p>Creazione del dict periodo di fine</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>year</strong> – Anno del periodo di fine</p></li>
-<li><p><strong>month</strong> – Mese del periodo di fine</p></li>
-<li><p><strong>day</strong> – Giorno del periodo di fine</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Ritora un dict del periodo di fine</p>
-</dd>
-</dl>
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">get_period_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#diary.period.get_period_to" title="Link to this definition">¶</a></dt>
+<dd><p>Creazione del dict periodo di fine
+:param year: Anno del periodo di fine
+:type year int
+:param month: Mese del periodo di fine
+:type month int
+:param day: Giorno del periodo di fine
+:type day int
+:param hour: Ora del periodo di fine
+:type hour int
+:param minute: Minuti del periodo di fine
+:type minute int
+:return: Ritora un dict del periodo di fine</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.period.period_note">
-<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">period_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">period_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.period_note" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">period_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.period_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per un periodo specifico.
-:param period_from: Data per periodo di partenza
-:type dict
-:param period_to: Data per periodo di fine
-:type dict
+:param name: Nome per periodo di partenza
+:type name str
 :param description: Descrizione dell’evento del periodo
-:type str
+:type description str
+:param period_from: Data per periodo di partenza
+:type period_from dict
+:param period_to: Data per periodo di fine
+:type period_to dict
 :param do: Stato della voce del diario (True o False).
-:type Bool
+:type do Bool
 :return: Ritorna un evento scelto in un certo periodo</p>
 </dd></dl>
 
