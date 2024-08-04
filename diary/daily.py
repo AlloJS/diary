@@ -45,16 +45,16 @@ def daily_note(name,description,year,month,day,hour,minute,minut_duration,do):
         d_d = datetime.datetime(year, month, day,hour,minute,0, tzinfo=time_zone)
         date_start = datetime.datetime.strftime(d_d, '%Y-%m-%d %H:%M:%S')
         d_e = d_d + datetime.timedelta(minutes=minut_duration)
-        date_end = datetime.datetime.strftime(d_e,'%Y-%m-%d %H:%M:%S')
+        date_and = datetime.datetime.strftime(d_e,'%Y-%m-%d %H:%M:%S')
 
         obj_diary = {
             'name': name,
             'description': description,
             'date start': date_start,
-            'date end': date_end,
+            'date and': date_and,
             'do': do,
             'repeat': False,
-            'calendar': calendar.month(year, month)
+            'calendar': [calendar.month(year, month)]
         }
 
         return obj_diary
@@ -95,10 +95,10 @@ def modify_daily_date(obj_daily, year, month, day,hour,minute,minut_duration):
         d_d = datetime.datetime(year, month, day,hour,minute,0,tzinfo=time_zone)
         date_diary = datetime.datetime.strftime(d_d, '%Y-%m-%d %H:%M:%S')
         d_e = d_d + datetime.timedelta(minutes=minut_duration)
-        date_end = datetime.datetime.strftime(d_e, '%Y-%m-%d %H:%M:%S')
-        obj_daily['calendar'] = calendar.month(year, month)
+        date_and = datetime.datetime.strftime(d_e, '%Y-%m-%d %H:%M:%S')
+        obj_daily['calendar'] = [calendar.month(year, month)]
         obj_daily['date start'] = date_diary
-        obj_daily['date end'] = date_end
+        obj_daily['date and'] = date_and
         return obj_daily
 
     except ErrorDate as ed:
@@ -130,18 +130,5 @@ def switch_do_daily(obj_daily):
     obj_daily['do'] = not obj_daily['do']
     return obj_daily
 
-def convert_daily_to_string(obj_daily):
-    """
-    Converte una voce di diario in una stringa formattata.
 
-    :param obj_daily: Oggetto della voce del diario da convertire.
-    :type obj_daily: dict
-    :return: Una stringa che rappresenta la voce del diario.
-    :rtype: str
-    """
-    str_daily = (
-        f"{obj_daily['calendar']}\n"
-        f"{obj_daily['date']}:\n{obj_daily['description']}\n"
-        f"Do: {obj_daily['do']}"
-    )
-    return str_daily
+

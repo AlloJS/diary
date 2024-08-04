@@ -44,3 +44,22 @@ class Diary:
         self.diary.append(event)
         return self.diary
 
+    def convert_diary_str(self):
+        """
+        Converte il diario in una stringa
+        :return: Diario in una stringa
+        """
+        str_diary = ''
+
+        for event in self.diary:
+
+            str_diary += (
+                f"{event['date start']}:-{event['date and']}\n"
+                f"{event['name']}\n"
+                f"{event['description']}\n"
+                f"Do: {event['do']}\n"
+                f"-------------------------------------------\n"
+            )
+            calendar_str = ''
+
+        return str_diary

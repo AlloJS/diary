@@ -6,7 +6,7 @@ except ImportError:
 import datetime
 import calendar
 
-def monthly_note(year,month,description,do):
+def monthly_note(name,description,year,month,do):
     """
     Crea una voce di diario per un mese specifico.
 
@@ -27,10 +27,21 @@ def monthly_note(year,month,description,do):
         if month not in range(1, 13):
             raise ErrorDate('Il mese non è valido.')
         
-        date = datetime.date(year,month,1)
-        month_diary = datetime.date.strftime(date,'%B %Y')
-        calendar_month = calendar.month(year,month)
-        obj_monthly = {'month':month_diary,'description':description,'do':do,'calendar':calendar_month}
+        start_date = datetime.date(year,month,1)
+        date_start = datetime.date.strftime(start_date,'%d %B %Y')
+        and_date = datetime.date(year, month, calendar.monthrange(year, month)[1])
+        date_and =  datetime.date.strftime(and_date,'%d %B %Y')
+
+        obj_monthly = {
+            'name': name,
+            'description': description,
+            'date start': date_start,
+            'date and': date_and,
+            'do': do,
+            'repeat': False,
+            'calendar': [calendar.month(year, month)]
+        }
+
         return obj_monthly
     
     except ErrorDate as ed:
@@ -55,9 +66,13 @@ def modify_monthly_month(obj_monthly,year,month):
         if month not in range(1, 13):
             raise ErrorDate('Il mese non è valido.')
         
-        date = datetime.date(year, month, 1)
-        month_diary = datetime.date.strftime(date, '%B %Y')
-        obj_monthly['month'] = month_diary
+        start_date = datetime.date(year, month, 1)
+        date_start = datetime.date.strftime(start_date, '%d %B %Y')
+        obj_monthly['date start'] = date_start
+        and_date = datetime.date(year, month, calendar.monthrange(year, month)[1])
+        date_end = datetime.date.strftime(and_date, '%d %B %Y')
+        obj_monthly['date and'] = date_end
+        obj_monthly['calendar'] = [calendar.month(year, month)]
         return obj_monthly
     
     except ErrorDate as ed:
@@ -93,20 +108,5 @@ def switch_do_monthly(obj_monthly):
         obj_monthly['do'] = True
     return obj_monthly
 
-def convert_monthly_to_string(obj_daily):
-    """
-    Converte una voce di diario monthly in una stringa formattata.
-
-    :param obj_daily: Oggetto della voce del diario da convertire.
-    :type obj_daily: dict
-    :return: Una stringa che rappresenta la voce del diario.
-    :rtype: str
-    """
-    str_daily = (
-        f"{obj_daily['calendar']}\n"
-        f"{obj_daily['month']}:\n{obj_daily['description']}\n"
-        f"Do: {obj_daily['do']}"
-    )
-    return str_daily
         
 
