@@ -23,3 +23,17 @@ new_period = period.period_note('Test periodo','Test evento periodo da a',new_ev
 d.diary.append(new_period)
 print(d.diary)
 print(d.convert_diary_str())
+
+name = 'name'
+description = 'description'
+year = 2023
+month = 2
+day = 10
+hour = 20
+minute = 35
+minut_duration = 45
+do = False
+
+obj_daily = daily.daily_note(name, description, year, month, day, hour, minute, minut_duration, do)
+print('TO TEST')
+print(obj_daily)
