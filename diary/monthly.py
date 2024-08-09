@@ -30,7 +30,7 @@ def monthly_note(name,description,year,month,do):
         start_date = datetime.date(year,month,1)
         date_start = datetime.date.strftime(start_date,'%d %B %Y')
         and_date = datetime.date(year, month, calendar.monthrange(year, month)[1])
-        date_and =  datetime.date.strftime(and_date,'%d %B %Y')
+        date_and = datetime.date.strftime(and_date,'%d %B %Y')
 
         obj_monthly = {
             'name': name,

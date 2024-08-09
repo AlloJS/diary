@@ -40,23 +40,6 @@
 <section id="module-diary.daily">
 <span id="diary-daily-module"></span><h2>diary.daily module<a class="headerlink" href="#module-diary.daily" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="diary.daily.convert_daily_to_string">
-<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">convert_daily_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.convert_daily_to_string" title="Link to this definition">¶</a></dt>
-<dd><p>Converte una voce di diario in una stringa formattata.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>obj_daily</strong> (<em>dict</em>) – Oggetto della voce del diario da convertire.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Una stringa che rappresenta la voce del diario.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.daily_note">
 <span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">daily_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minut_duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.daily_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per una data specifica.</p>
@@ -164,23 +147,6 @@
 <section id="module-diary.monthly">
 <span id="diary-monthly-module"></span><h2>diary.monthly module<a class="headerlink" href="#module-diary.monthly" title="Link to this heading">¶</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="diary.monthly.convert_monthly_to_string">
-<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">convert_monthly_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_daily</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.convert_monthly_to_string" title="Link to this definition">¶</a></dt>
-<dd><p>Converte una voce di diario monthly in una stringa formattata.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>obj_daily</strong> (<em>dict</em>) – Oggetto della voce del diario da convertire.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Una stringa che rappresenta la voce del diario.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="diary.monthly.modify_monthly_description">
 <span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">modify_monthly_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_monthly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.modify_monthly_description" title="Link to this definition">¶</a></dt>
 <dd><p>Modifica la descrizione di una voce di diario mensile esistente.</p>
@@ -276,6 +242,13 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.new_diary.</span></span><span class="sig-name descname"><span class="pre">Diary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.new_diary.Diary" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Costruzione di un nuovo diario per la registrazione degli eventi</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.new_diary.Diary.convert_diary_str">
+<span class="sig-name descname"><span class="pre">convert_diary_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.new_diary.Diary.convert_diary_str" title="Link to this definition">¶</a></dt>
+<dd><p>Converte il diario in una stringa
+:return: Diario in una stringa</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="diary.new_diary.Diary.put_event_diary">
 <span class="sig-name descname"><span class="pre">put_event_diary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.new_diary.Diary.put_event_diary" title="Link to this definition">¶</a></dt>
