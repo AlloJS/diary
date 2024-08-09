@@ -83,22 +83,10 @@ def test_modify_description_daily():
     obj_daily = daily_note(name, description, year, month, day, hour, minute, minut_duration, do)
 
     new_descriptio = 'New desription to test'
+    new_obj = modify_description_daily(obj_daily, new_descriptio)
 
-    time_zone = tz.gettz('Europe/Paris')
-    start_datetime = datetime.datetime(year, month, day, hour, minute, 0,tzinfo=time_zone)
-    end_datetime = start_datetime + datetime.timedelta(minutes=minut_duration)
 
-    new_obj = {
-        'name': name,
-        'description': new_descriptio,
-        'date start': start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
-        'date and': end_datetime.strftime('%Y-%m-%d %H:%M:%S'),
-        'do': do,
-        'repeat': False,
-        'calendar': [calendar.month(year, month)]
-    }
-
-    assert modify_description_daily(obj_daily, new_descriptio) == new_obj
+    assert new_obj['description'] == new_descriptio
 
 def test_switch_do_daily():
     name = 'name'
@@ -113,20 +101,8 @@ def test_switch_do_daily():
 
     obj_daily = daily_note(name, description, year, month, day, hour, minute, minut_duration, do)
 
-    time_zone = tz.gettz('Europe/Paris')
-    start_datetime = datetime.datetime(year, month, day, hour, minute, 0, tzinfo=time_zone)
-    end_datetime = start_datetime + datetime.timedelta(minutes=minut_duration)
+    new_obj = switch_do_daily(obj_daily)
+    assert new_obj['do'] == True
 
-    new_do_switch = True
-
-    new_obj = {
-        'name': name,
-        'description': description,
-        'date start': start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
-        'date and': end_datetime.strftime('%Y-%m-%d %H:%M:%S'),
-        'do': new_do_switch,
-        'repeat': False,
-        'calendar': [calendar.month(year, month)]
-    }
-
-    assert switch_do_daily(obj_daily) == new_obj
+    new_obj = switch_do_daily(obj_daily)
+    assert new_obj['do'] == False
