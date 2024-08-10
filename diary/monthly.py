@@ -28,9 +28,9 @@ def monthly_note(name,description,year,month,do):
             raise ErrorDate('Il mese non è valido.')
         
         start_date = datetime.date(year,month,1)
-        date_start = datetime.date.strftime(start_date,'%d %B %Y')
+        date_start = datetime.date.strftime(start_date,'%d %m %Y')
         and_date = datetime.date(year, month, calendar.monthrange(year, month)[1])
-        date_and = datetime.date.strftime(and_date,'%d %B %Y')
+        date_and = datetime.date.strftime(and_date,'%d %m %Y')
 
         obj_monthly = {
             'name': name,
@@ -67,10 +67,10 @@ def modify_monthly_month(obj_monthly,year,month):
             raise ErrorDate('Il mese non è valido.')
         
         start_date = datetime.date(year, month, 1)
-        date_start = datetime.date.strftime(start_date, '%d %B %Y')
+        date_start = datetime.date.strftime(start_date, '%d %m %Y')
         obj_monthly['date start'] = date_start
         and_date = datetime.date(year, month, calendar.monthrange(year, month)[1])
-        date_end = datetime.date.strftime(and_date, '%d %B %Y')
+        date_end = datetime.date.strftime(and_date, '%d %m %Y')
         obj_monthly['date and'] = date_end
         obj_monthly['calendar'] = [calendar.month(year, month)]
         return obj_monthly

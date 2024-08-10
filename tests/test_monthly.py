@@ -18,8 +18,8 @@ def test_monthly_note():
     expected_result = {
         'name': name,
         'description':description,
-        'date start': datetime.date.strftime(start_date, '%d %B %Y'),
-        'date and': datetime.date.strftime(and_date, '%d %B %Y'),
+        'date start': datetime.date.strftime(start_date, '%d %m %Y'),
+        'date and': datetime.date.strftime(and_date, '%d %m %Y'),
         'do': do,
         'repeat': False,
         'calendar': [calendar.month(year, month)]
@@ -44,8 +44,8 @@ def test_modify_monthly_month():
     start_date = datetime.date(new_year,new_month,1)
     end_date = datetime.date(new_year,new_month,calendar.monthrange(new_year,new_month)[1])
 
-    assert expected_result['date start'] == datetime.date.strftime(start_date, '%d %B %Y')
-    assert expected_result['date and'] == datetime.date.strftime(end_date, '%d %B %Y')
+    assert expected_result['date start'] == datetime.date.strftime(start_date, '%d %m %Y')
+    assert expected_result['date and'] == datetime.date.strftime(end_date, '%d %m %Y')
 
 
 def test_modify_monthly_description():

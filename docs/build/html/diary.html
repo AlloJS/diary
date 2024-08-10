@@ -143,6 +143,26 @@
 </dd></dl>
 
 </section>
+<section id="module-diary.diary_txt">
+<span id="diary-diary-txt-module"></span><h2>diary.diary_txt module<a class="headerlink" href="#module-diary.diary_txt" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.diary_txt.read_diary_txt">
+<span class="sig-prename descclassname"><span class="pre">diary.diary_txt.</span></span><span class="sig-name descname"><span class="pre">read_diary_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_txt.read_diary_txt" title="Link to this definition">¶</a></dt>
+<dd><p>Leggere file .txt di un Diario
+:param path: Percorso dove prendere il file da leggere
+:return: Stampa in console le righe del diario</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.diary_txt.write_diary_on_txt">
+<span class="sig-prename descclassname"><span class="pre">diary.diary_txt.</span></span><span class="sig-name descname"><span class="pre">write_diary_on_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_diary_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_txt.write_diary_on_txt" title="Link to this definition">¶</a></dt>
+<dd><p>Scrivi il diario su un foglio txt
+:param path: Percorso dove scrivere il testo
+:param my_diary_str: Diario da scrivere su .txt
+:return: Non ritorna nulla</p>
+</dd></dl>
+
+</section>
 <section id="module-diary.monthly">
 <span id="diary-monthly-module"></span><h2>diary.monthly module<a class="headerlink" href="#module-diary.monthly" title="Link to this heading">¶</a></h2>
 <dl class="py function">
@@ -268,6 +288,16 @@
 <section id="module-diary.period">
 <span id="diary-period-module"></span><h2>diary.period module<a class="headerlink" href="#module-diary.period" title="Link to this heading">¶</a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="diary.period.change_period">
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">change_period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_to</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.change_period" title="Link to this definition">¶</a></dt>
+<dd><p>Modifica le date del periodo selezionato
+:param obj_period: Evento a cui cambiare le date del periodo
+:param Period_from: Nuovo periodo di partenza da sostituire al vecchio
+:param Period_to: Nuovo periodo di fine da sostituire al vecchio
+:return: Ritorna l’oggetto periodo modificato</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="diary.period.get_period_from">
 <span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">get_period_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#diary.period.get_period_from" title="Link to this definition">¶</a></dt>
 <dd><p>Creazione del dict periodo di partenza
@@ -302,6 +332,15 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="diary.period.modify_period_description">
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">modify_period_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_period</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.modify_period_description" title="Link to this definition">¶</a></dt>
+<dd><p>Modifica la descrizione del perido
+:param obj_period: Oggetto evento da modificare
+:param description: Nuova descrizione da sostituire alla vecchia
+:return: Ritorna l’oggetto evento con descrizione modificata</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="diary.period.period_note">
 <span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">period_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.period_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per un periodo specifico.
@@ -316,6 +355,14 @@
 :param do: Stato della voce del diario (True o False).
 :type do Bool
 :return: Ritorna un evento scelto in un certo periodo</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.period.switch_do_period">
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">switch_do_period</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_period</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.switch_do_period" title="Link to this definition">¶</a></dt>
+<dd><p>Cambia lo stato del do
+:param obj_period: Oggetto evento da modificare
+:return: RItorna l’oggetto evento con il do modificato</p>
 </dd></dl>
 
 </section>
@@ -353,6 +400,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.daily">diary.daily module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.diary_except">diary.diary_except module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-diary.diary_txt">diary.diary_txt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.monthly">diary.monthly module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.new_diary">diary.new_diary module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.period">diary.period module</a></li>

@@ -40,6 +40,7 @@ def get_period_from(year,month,day,hour,minute)->dict:
     except ErrorDate as ed:
         print(ed.message)
 
+
 def get_period_to(year,month,day,hour,minute)->dict:
     """
     Creazione del dict periodo di fine
@@ -103,9 +104,9 @@ def period_note(name,description,period_from: dict,period_to: dict,do):
 
         time_zone = tz.gettz('Europe/Paris')
         date_from = datetime.datetime(period_from['year'],period_from['month'],period_from['day'],period_from['hour'],period_from['minute'],tzinfo=time_zone)
-        date_from_format = datetime.datetime.strftime(date_from,'%d %B %Y %H:%M:%S')
+        date_from_format = datetime.datetime.strftime(date_from,'%d %m %Y %H:%M:%S')
         date_to = datetime.datetime(period_to['year'], period_to['month'], period_to['day'], period_to['hour'], period_to['minute'], tzinfo=time_zone)
-        date_to_format = datetime.datetime.strftime(date_to,'%d %B %Y %H:%M:%S')
+        date_to_format = datetime.datetime.strftime(date_to,'%d %m %Y %H:%M:%S')
         calendar_period = []
 
         if period_from['year'] == period_to['year']:
@@ -138,3 +139,76 @@ def period_note(name,description,period_from: dict,period_to: dict,do):
 
     except ErrorDate as ed:
         print(ed.message)
+
+def change_period(obj_period,period_from,period_to):
+    """
+    Modifica le date del periodo selezionato
+    :param obj_period: Evento a cui cambiare le date del periodo
+    :param Period_from: Nuovo periodo di partenza da sostituire al vecchio
+    :param Period_to: Nuovo periodo di fine da sostituire al vecchio
+    :return: Ritorna l'oggetto periodo modificato
+    """
+    try:
+
+        if period_from['month'] not in range(1, 13) and period_to['month'] not in range(1, 13):
+            raise ErrorDate('Il mese non è valido.')
+
+        if period_from['day'] not in range(1, 32) and period_to['day'] not in range(1, 32):
+            raise ErrorDate('Il giorno non è valido.')
+
+        if period_from['hour'] not in range(0, 24) and period_to['hour'] not in range(0, 24):
+            raise ErrorDate('L\'ora non è valida.')
+
+        if period_from['minute'] not in range(0, 60) and period_to['minute'] not in range(0, 60):
+            raise ErrorDate('I minuti non sono validi.')
+
+        time_zone = tz.gettz('Europe/Paris')
+        date_from = datetime.datetime(period_from['year'],period_from['month'],period_from['day'],period_from['hour'],period_from['minute'],tzinfo=time_zone)
+        date_from_format = datetime.datetime.strftime(date_from,'%d %m %Y %H:%M:%S')
+        date_to = datetime.datetime(period_to['year'], period_to['month'], period_to['day'], period_to['hour'], period_to['minute'], tzinfo=time_zone)
+        date_to_format = datetime.datetime.strftime(date_to,'%d %m %Y %H:%M:%S')
+        calendar_period = []
+
+        if period_from['year'] == period_to['year']:
+            calendar_period = [calendar.month(period_from['year'], month) for month in range(period_from['month'], period_to['month'] + 1)]
+        else:
+            for year in range(period_from['year'], period_to['year'] + 1):
+                if year == period_from['year']:
+                    for month in range(period_from['month'], 13):
+                        calendar_period.append(calendar.month(year, month))
+
+                if year != period_to['year'] and year != period_from['year']:
+                    calendar_period.append(calendar.calendar(year))
+
+                if year == period_to['year']:
+                    for month in range(1, period_to['month'] + 1):
+                        calendar_period.append(calendar.month(year, month))
+
+        obj_period['date start'] = date_from_format,
+        obj_period['date and'] = date_to_format,
+        obj_period['calendar'] = calendar_period
+
+        return obj_period
+    except ErrorDate as ed:
+        print(ed.message)
+
+
+def modify_period_description(obj_period,description):
+    """
+    Modifica la descrizione del perido
+    :param obj_period: Oggetto evento da modificare
+    :param description: Nuova descrizione da sostituire alla vecchia
+    :return: Ritorna l'oggetto evento con descrizione modificata
+    """
+    obj_period['description'] = description
+    return obj_period
+
+def switch_do_period(obj_period):
+    """
+    Cambia lo stato del do
+    :param obj_period: Oggetto evento da modificare
+    :return: RItorna l'oggetto evento con il do modificato
+    """
+    obj_period['do'] = not obj_period['do']
+
+    return obj_period

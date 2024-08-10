@@ -1,5 +1,6 @@
 import datetime
 from dateutil import tz
+
 class Diary:
     """
     Costruzione di un nuovo diario per la registrazione degli eventi
@@ -54,7 +55,7 @@ class Diary:
         for event in self.diary:
 
             str_diary += (
-                f"{event['date start']}:-{event['date and']}\n"
+                f"{event['date start']}-{event['date and']}\n"
                 f"{event['name']}\n"
                 f"{event['description']}\n"
                 f"Do: {event['do']}\n"
@@ -63,3 +64,17 @@ class Diary:
             calendar_str = ''
 
         return str_diary
+    """
+    TO COMPLETE
+    
+    def orderby_startdata(self):
+        new_diary = []
+        for event in self.diary:
+            #new_diary.append(map(lambda x: x['date start'], event))
+            #new_diary.append(sorted(event,key=lambda x: x[0]))
+            print(event['date start'])
+            pass
+        print(new_diary)
+        self.diary = new_diary
+        return self.diary
+"""

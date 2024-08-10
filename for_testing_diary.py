@@ -1,4 +1,5 @@
 from diary.new_diary import Diary
+from diary.diary_txt import write_diary_on_txt,read_diary_txt
 from diary import monthly
 from diary import daily
 from diary import period
@@ -20,9 +21,14 @@ monthly.modify_monthly_month(new_event_monthly,2024,8)
 new_event_period_from = period.get_period_from(2024,11,10,10,30)
 new_event_period_to = period.get_period_to(2027 ,3,1,23,30)
 new_period = period.period_note('Test periodo','Test evento periodo da a',new_event_period_from,new_event_period_to,False)
+
+new_event_period_from2 = period.get_period_from(2023,10,1,11,20)
+new_event_period_to2 = period.get_period_to(2028,4,12,22,0)
+period.change_period(new_period,new_event_period_from2,new_event_period_to2)
+period.modify_period_description(new_period,'Change the description')
+period.switch_do_period(new_period)
+
 d.diary.append(new_period)
-print(d.diary)
-print(d.convert_diary_str())
 
 name = 'name'
 description = 'description'
@@ -35,5 +41,7 @@ minut_duration = 45
 do = False
 
 obj_daily = daily.daily_note(name, description, year, month, day, hour, minute, minut_duration, do)
-print('TO TEST')
-print(obj_daily)
+d.orderby_startdata()
+diary_str = d.convert_diary_str()
+write_diary_on_txt('diary_test.txt',diary_str)
+read_diary_txt('diary_test.txt')

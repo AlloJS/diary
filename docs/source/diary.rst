@@ -20,6 +20,14 @@ diary.diary\_except module
    :undoc-members:
    :show-inheritance:
 
+diary.diary\_txt module
+-----------------------
+
+.. automodule:: diary.diary_txt
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 diary.monthly module
 --------------------
 
