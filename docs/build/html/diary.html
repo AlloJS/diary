@@ -134,8 +134,26 @@
 </dd></dl>
 
 </section>
+<section id="module-diary.diary_excel">
+<span id="diary-diary-excel-module"></span><h2>diary.diary_excel module<a class="headerlink" href="#module-diary.diary_excel" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="diary.diary_excel.save_diary_excel">
+<span class="sig-prename descclassname"><span class="pre">diary.diary_excel.</span></span><span class="sig-name descname"><span class="pre">save_diary_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_excel.save_diary_excel" title="Link to this definition">¶</a></dt>
+<dd><p>Salvare file excel del riepilogo diario
+:param path: Percorso dove salvare il file excel
+:param diary: Oggetto diario che si vuole trasformare in excel
+:return: Ritorna un file xlsx con tutti gli eventi del diario</p>
+</dd></dl>
+
+</section>
 <section id="module-diary.diary_except">
 <span id="diary-diary-except-module"></span><h2>diary.diary_except module<a class="headerlink" href="#module-diary.diary_except" title="Link to this heading">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="diary.diary_except.ErrorAllowedValue">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.diary_except.</span></span><span class="sig-name descname"><span class="pre">ErrorAllowedValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_except.ErrorAllowedValue" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
 <dl class="py exception">
 <dt class="sig sig-object py" id="diary.diary_except.ErrorDate">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.diary_except.</span></span><span class="sig-name descname"><span class="pre">ErrorDate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_except.ErrorDate" title="Link to this definition">¶</a></dt>
@@ -264,8 +282,25 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="diary.new_diary.Diary.convert_diary_str">
 <span class="sig-name descname"><span class="pre">convert_diary_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.new_diary.Diary.convert_diary_str" title="Link to this definition">¶</a></dt>
-<dd><p>Converte il diario in una stringa
-:return: Diario in una stringa</p>
+<dd><p>Converte il diario in una stringa.
+:return: Diario in una stringa.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.new_diary.Diary.orderby_name_event">
+<span class="sig-name descname"><span class="pre">orderby_name_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.new_diary.Diary.orderby_name_event" title="Link to this definition">¶</a></dt>
+<dd><p>Riordina il diario in ordine in base al nome
+:param order: Può essere crescente o decrescente
+:type order: str
+:return: Restitusce l’oggetto diario in ordine per nome</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.new_diary.Diary.orderby_startdata">
+<span class="sig-name descname"><span class="pre">orderby_startdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.new_diary.Diary.orderby_startdata" title="Link to this definition">¶</a></dt>
+<dd><p>Riordina il diario in ordine di data
+:param order: Può essere crescente o decrescente
+:return: Restitusce l’oggetto diario in ordine di cronologia di data</p>
 </dd></dl>
 
 <dl class="py method">
@@ -399,6 +434,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">diary package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.daily">diary.daily module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-diary.diary_excel">diary.diary_excel module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.diary_except">diary.diary_except module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.diary_txt">diary.diary_txt module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-diary.monthly">diary.monthly module</a></li>

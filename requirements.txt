@@ -1,3 +1,5 @@
 dateutil
 sphinx
 pytest
+pandas
+openpyxl

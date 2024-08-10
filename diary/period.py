@@ -184,10 +184,9 @@ def change_period(obj_period,period_from,period_to):
                     for month in range(1, period_to['month'] + 1):
                         calendar_period.append(calendar.month(year, month))
 
-        obj_period['date start'] = date_from_format,
-        obj_period['date and'] = date_to_format,
+        obj_period['date start'] = date_from_format
+        obj_period['date and'] = date_to_format
         obj_period['calendar'] = calendar_period
-
         return obj_period
     except ErrorDate as ed:
         print(ed.message)

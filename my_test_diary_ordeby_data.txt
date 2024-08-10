@@ -1,0 +1,15 @@
+PERIODO: dal: 29-July-2024 16:15:00 al: 29-July-2024 17:45:00
+NOME: Test Event
+DESCRIZIONE: Test to insert invent on diary
+SVOLTO: Fatto
+-------------------------------------------
+PERIODO: dal: 08-September-2024 10:30:00 al: 01-March-2027 23:30:00
+NOME: Test periodo
+DESCRIZIONE: Test evento periodo da a
+SVOLTO: Da svolgere
+-------------------------------------------
+PERIODO: dal: 01-December-2024 00:00:00 al: 31-December-2024 00:00:00
+NOME: Evento del mese
+DESCRIZIONE: Esame AWS
+SVOLTO: Da svolgere
+-------------------------------------------
