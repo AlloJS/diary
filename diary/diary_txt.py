@@ -6,9 +6,6 @@ try:
     from .diary_except import ErrorDate  # Importazione relativa per Sphinx
 except ImportError:
     from diary_except import ErrorDate   # Importazione assoluta per l'esecuzione normale
-import datetime
-import calendar
-from dateutil import tz
 
 def write_diary_on_txt(path,my_diary_str):
     """

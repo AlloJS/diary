@@ -3,3 +3,4 @@ sphinx
 pytest
 pandas
 openpyxl
+mysql-connector-python

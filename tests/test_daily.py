@@ -18,8 +18,9 @@ def test_daily_note():
     time_zone = tz.gettz('Europe/Paris')
     start_datetime = datetime.datetime(year, month, day, hour, minute, 0, tzinfo=time_zone)
     end_datetime = start_datetime + datetime.timedelta(minutes=minut_duration)
-
+    obj_daily = daily_note(name,description,year,month,day,hour,minute,minut_duration,do)
     expected_result = {
+        'univoc_id': obj_daily['univoc_id'],
         'name': name,
         'description': description,
         'date start': start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
@@ -30,7 +31,7 @@ def test_daily_note():
     }
 
 
-    assert  daily_note(name,description,year,month,day,hour,minute,minut_duration,do) == expected_result
+    assert obj_daily == expected_result
 
 def test_modify_daily_date():
     name = 'name'
@@ -58,6 +59,7 @@ def test_modify_daily_date():
     end_datetime2 = start_datetime2 + datetime.timedelta(minutes=minut_duraction_change)
 
     new_obj_changed = {
+        'univoc_id': obj_daily['univoc_id'],
         'name': name,
         'description': description,
         'date start': start_datetime2.strftime('%Y-%m-%d %H:%M:%S'),

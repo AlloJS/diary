@@ -12,6 +12,14 @@ diary.daily module
    :undoc-members:
    :show-inheritance:
 
+diary.diary\_DB module
+----------------------
+
+.. automodule:: diary.diary_DB
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 diary.diary\_excel module
 -------------------------
 
@@ -24,6 +32,14 @@ diary.diary\_except module
 --------------------------
 
 .. automodule:: diary.diary_except
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+diary.diary\_policy\_decorators module
+--------------------------------------
+
+.. automodule:: diary.diary_policy_decorators
    :members:
    :undoc-members:
    :show-inheritance:

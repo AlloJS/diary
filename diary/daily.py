@@ -6,7 +6,16 @@ except ImportError:
 import datetime
 import calendar
 from dateutil import tz
-import time
+import random
+
+def _generate_random_id():
+    """
+    Generatore per id unico di eventi
+    :return: Ritorna un id univoco per assegnazione evento
+    """
+    numeri_casuali = [random.randint(0,100) for _ in range(10)]
+    numeri_casuali_stringa = ''.join(str(numero) for numero in numeri_casuali)
+    return numeri_casuali_stringa
 
 def daily_note(name,description,year,month,day,hour,minute,minut_duration,do):
     """
@@ -46,8 +55,9 @@ def daily_note(name,description,year,month,day,hour,minute,minut_duration,do):
         date_start = datetime.datetime.strftime(d_d, '%Y-%m-%d %H:%M:%S')
         d_e = d_d + datetime.timedelta(minutes=minut_duration)
         date_and = datetime.datetime.strftime(d_e,'%Y-%m-%d %H:%M:%S')
-
+        univoc_id = _generate_random_id()
         obj_diary = {
+            'univoc_id': univoc_id,
             'name': name,
             'description': description,
             'date start': date_start,
