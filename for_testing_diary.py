@@ -25,12 +25,14 @@ period.switch_do_period(event_period)
 d.put_event_diary(event_dealy)
 d.put_event_diary(monthly_event)
 d.put_event_diary(event_period)
-print(d.diary[0])
-print(d.diary[1])
-print(d.diary[2])
+#print(d.diary[0])
+#print(d.diary[1])
+#print(d.diary[2])
 
-print(d.convert_diary_str())
+#print(d.convert_diary_str())
+d.diary[0]['univoc_id'] = '3541791985364674716'
 d.write_events_DB()
+
 
 
 
