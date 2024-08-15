@@ -6,6 +6,7 @@ except ImportError:
 import datetime
 import calendar
 from dateutil import tz
+from .generator_UID import _generate_random_id
 
 def get_period_from(year,month,day,hour,minute)->dict:
     """
@@ -104,9 +105,9 @@ def period_note(name,description,period_from: dict,period_to: dict,do):
 
         time_zone = tz.gettz('Europe/Paris')
         date_from = datetime.datetime(period_from['year'],period_from['month'],period_from['day'],period_from['hour'],period_from['minute'],tzinfo=time_zone)
-        date_from_format = datetime.datetime.strftime(date_from,'%d %m %Y %H:%M:%S')
+        date_from_format = datetime.datetime.strftime(date_from,'%Y-%m-%d %H:%M:%S')
         date_to = datetime.datetime(period_to['year'], period_to['month'], period_to['day'], period_to['hour'], period_to['minute'], tzinfo=time_zone)
-        date_to_format = datetime.datetime.strftime(date_to,'%d %m %Y %H:%M:%S')
+        date_to_format = datetime.datetime.strftime(date_to,'%Y-%m-%d %H:%M:%S')
         calendar_period = []
 
         if period_from['year'] == period_to['year']:
@@ -126,6 +127,7 @@ def period_note(name,description,period_from: dict,period_to: dict,do):
 
 
         obj_period = {
+            'univoc_id': _generate_random_id(),
             'name': name,
             'description': description,
             'date start': date_from_format,
@@ -164,9 +166,9 @@ def change_period(obj_period,period_from,period_to):
 
         time_zone = tz.gettz('Europe/Paris')
         date_from = datetime.datetime(period_from['year'],period_from['month'],period_from['day'],period_from['hour'],period_from['minute'],tzinfo=time_zone)
-        date_from_format = datetime.datetime.strftime(date_from,'%d %m %Y %H:%M:%S')
+        date_from_format = datetime.datetime.strftime(date_from,'%Y-%m-%d %H:%M:%S')
         date_to = datetime.datetime(period_to['year'], period_to['month'], period_to['day'], period_to['hour'], period_to['minute'], tzinfo=time_zone)
-        date_to_format = datetime.datetime.strftime(date_to,'%d %m %Y %H:%M:%S')
+        date_to_format = datetime.datetime.strftime(date_to,'%Y-%m-%d %H:%M:%S')
         calendar_period = []
 
         if period_from['year'] == period_to['year']:

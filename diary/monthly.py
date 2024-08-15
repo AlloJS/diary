@@ -5,6 +5,7 @@ except ImportError:
 
 import datetime
 import calendar
+from .generator_UID import _generate_random_id
 
 def monthly_note(name,description,year,month,do):
     """
@@ -28,11 +29,12 @@ def monthly_note(name,description,year,month,do):
             raise ErrorDate('Il mese non è valido.')
         
         start_date = datetime.date(year,month,1)
-        date_start = datetime.date.strftime(start_date,'%d %m %Y')
+        date_start = datetime.date.strftime(start_date,'%Y-%m-%d %H:%M:%S')
         and_date = datetime.date(year, month, calendar.monthrange(year, month)[1])
-        date_and = datetime.date.strftime(and_date,'%d %m %Y')
+        date_and = datetime.date.strftime(and_date,'%Y-%m-%d %H:%M:%S')
 
         obj_monthly = {
+            'univoc_id': _generate_random_id(),
             'name': name,
             'description': description,
             'date start': date_start,
@@ -67,10 +69,10 @@ def modify_monthly_month(obj_monthly,year,month):
             raise ErrorDate('Il mese non è valido.')
         
         start_date = datetime.date(year, month, 1)
-        date_start = datetime.date.strftime(start_date, '%d %m %Y')
+        date_start = datetime.date.strftime(start_date, '%Y-%m-%d %H:%M:%S')
         obj_monthly['date start'] = date_start
         and_date = datetime.date(year, month, calendar.monthrange(year, month)[1])
-        date_end = datetime.date.strftime(and_date, '%d %m %Y')
+        date_end = datetime.date.strftime(and_date, '%Y-%m-%d %H:%M:%S')
         obj_monthly['date and'] = date_end
         obj_monthly['calendar'] = [calendar.month(year, month)]
         return obj_monthly

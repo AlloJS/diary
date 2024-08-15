@@ -35,20 +35,18 @@ class DiarySQL(Diary):
         :return: Ritorna la riuscita della scrittura in database
         """
         conn = self._create_connection()
-        query = "INSERT INTO Event (name,description,date_start,date_and,do,repeat_event,calendar) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+        query = "INSERT INTO Event (univoc_id,name,description,date_start,date_and,do,repeat_event,calendar) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
         values = list()
         cursor = conn.cursor()
 
         try:
             for event in self.diary:
-                #Formatto data per scrivere in DB
-                data_start_parsed = self._parse_date(event['date start'])
-                data_and_parsed = self._parse_date(event['date and'])
                 #Creo lista per dati
+                values.append(str(event['univoc_id']))
                 values.append(event['name'])
                 values.append(event['description'])
-                values.append(data_start_parsed.strftime('%Y-%m-%d %H:%M:%S'))
-                values.append(data_and_parsed.strftime('%Y-%m-%d %H:%M:%S'))
+                values.append(event['date start'])
+                values.append(event['date start'])
                 values.append(event['do'])
                 values.append(0)
                 values.append(event['calendar'][0])

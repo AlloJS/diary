@@ -52,6 +52,14 @@ diary.diary\_txt module
    :undoc-members:
    :show-inheritance:
 
+diary.generator\_UID module
+---------------------------
+
+.. automodule:: diary.generator_UID
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 diary.monthly module
 --------------------
 

@@ -37,10 +37,10 @@ def test_period_note():
     time_zone = tz.gettz('Europe/Paris')
     date_from = datetime.datetime(period_from['year'], period_from['month'], period_from['day'], period_from['hour'],
                                   period_from['minute'], tzinfo=time_zone)
-    date_from_format = datetime.datetime.strftime(date_from, '%d %m %Y %H:%M:%S')
+    date_from_format = datetime.datetime.strftime(date_from, '%Y-%m-%d %H:%M:%S')
     date_to = datetime.datetime(period_to['year'], period_to['month'], period_to['day'], period_to['hour'],
                                 period_to['minute'], tzinfo=time_zone)
-    date_to_format = datetime.datetime.strftime(date_to, '%d %m %Y %H:%M:%S')
+    date_to_format = datetime.datetime.strftime(date_to, '%Y-%m-%d %H:%M:%S')
     calendar_period = []
 
     if period_from['year'] == period_to['year']:
@@ -59,7 +59,10 @@ def test_period_note():
                 for month in range(1, period_to['month'] + 1):
                     calendar_period.append(calendar.month(year, month))
 
+    obj_period = period_note(name,description,period_from,period_to,do)
+
     expected_result = {
+        'univoc_id' : obj_period['univoc_id'],
         'name': name,
         'description': description,
         'date start': date_from_format,
@@ -69,7 +72,7 @@ def test_period_note():
         'calendar': calendar_period
     }
 
-    assert period_note(name,description,period_from,period_to,do) == expected_result
+    assert obj_period == expected_result
 
 def test_change_period():
     period_from = get_period_from(2024, 11, 10, 10, 30)
@@ -82,9 +85,9 @@ def test_change_period():
 
     time_zone = tz.gettz('Europe/Paris')
     date_from = datetime.datetime(period_from2['year'], period_from2['month'], period_from2['day'], period_from2['hour'],period_from2['minute'], tzinfo=time_zone)
-    date_from_format = datetime.datetime.strftime(date_from, '%d %m %Y %H:%M:%S')
+    date_from_format = datetime.datetime.strftime(date_from, '%Y-%m-%d %H:%M:%S')
     date_to = datetime.datetime(period_to2['year'], period_to2['month'], period_to2['day'], period_to2['hour'],period_to2['minute'], tzinfo=time_zone)
-    date_to_format = datetime.datetime.strftime(date_to, '%d %m %Y %H:%M:%S')
+    date_to_format = datetime.datetime.strftime(date_to, '%Y-%m-%d %H:%M:%S')
     calendar_period = []
 
     if period_from2['year'] == period_to2['year']:
@@ -103,8 +106,8 @@ def test_change_period():
                     calendar_period.append(calendar.month(year, month))
 
 
-    assert obj['date start'][0] == date_from_format
-    assert obj['date and'][0] == date_to_format
+    assert obj['date start'] == date_from_format
+    assert obj['date and'] == date_to_format
     assert obj['calendar'] == calendar_period
 
 
