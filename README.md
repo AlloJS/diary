@@ -6,9 +6,194 @@ Una libreria Python per la gestione di voci di diario quotidiano.
 
 La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di diario quotidiano, inclusi controlli per date valide e formattazione delle voci.
 
+## Requisiti
+
+- Python 3.x
+- MySQL
+
 ## Installazione
 
-Puoi installare le dipendenze richieste con:
+1. **Clona il Repository**
 
-```sh
-pip install -r requirements.txt
+   ```sh
+   git clone https://github.com/AlloJS/Diary.git
+2. **Installazione delle dipendenze**
+
+   ```sh
+   pip install -r requirements.txt
+
+3. **Crea le Tabelle nel Database MySQL**
+
+   *Esegui il comando seguente per creare le tabelle nel database specificato. 
+   Sostituisci myuser, mypassword, e mydatabase con le tue credenziali e il nome del database.*
+   
+   ```sh
+    python create_tables.py --user=myuser --password=mypassword --database=mydatabase
+4. **Inizia a Usare la Libreria con il Database Sceglto**
+
+   ```sh
+   from diary.diary_sql import DiarySQL
+   
+   d = DiarySQL('<Name diary>','<host>','Diary','<user>','<password>')
+
+5. **Uso della Libreria Senza Database**
+
+   ```sh
+   from diary.diary import Diary
+   
+   d = Diary('<Name diary>')
+
+6. **Utilizzo del modulo daily per gestire eventi giornalieri**
+   
+   ```sh
+   import daily
+   
+   # Creazione di un nuovo evento
+   event_dealy = daily.daily_note(
+       title='Daily event',
+       description='My first daily event',
+       year=2024,
+       month=8,
+       day=15,
+       hour=14,
+       minute=51,
+       duration=5,          # Durata in minuti
+       is_recurring=False,  # Evento ricorrente o meno
+       diary_id=d.id_diary  # ID del diario a cui associare l'evento
+   )
+   
+   # Modifica della data e dell'orario dell'evento
+   daily.modify_daily_date(
+       event_dealy,
+       year=2024,
+       month=8,
+       day=15,
+       hour=15,
+       minute=0,
+       duration=6  # Nuova durata in minuti
+   )
+   
+   # Attiva o disattiva l'evento
+   daily.switch_do_daily(event_dealy)
+   
+   # Modifica della descrizione dell'evento
+   daily.modify_description_daily(
+   event_dealy,
+   new_description='My first daily event modify'
+   )
+
+7. **Utilizzo del modulo monthly per gestire eventi mensili**
+   
+   ```sh
+   import monthly
+   
+   # Creazione di un nuovo evento mensile
+   monthly_event = monthly.monthly_note(
+       title='Monthly Event',
+       description='My first monthly event',
+       year=2024,
+       month=8,
+       is_recurring=False,  # Evento ricorrente o meno
+       diary_id=d.id_diary  # ID del diario a cui associare l'evento
+   )
+   
+   # Modifica del mese dell'evento mensile
+   monthly.modify_monthly_month(
+       monthly_event,
+       year=2024,
+       month=7  # Nuovo mese
+   )
+   
+   # Attiva o disattiva l'evento mensile
+   monthly.switch_do_monthly(monthly_event)
+   
+   # Modifica della descrizione dell'evento mensile
+   monthly.modify_monthly_description(
+       monthly_event,
+       new_description='My first event monthly modify'
+   )
+
+8. **Utilizzo del modulo period per gestire eventi di un determinato periodo**
+   
+   ```sh
+   import period
+   
+   # Creazione di un nuovo evento periodico
+   event_period = period.period_note(
+       title='Period event',
+       description='My first event period',
+       start=period.get_period_from(2024, 8, 1, 10, 0),
+       end=period.get_period_to(2024, 8, 31, 10, 0),
+       is_recurring=False,  # Evento ricorrente o meno
+       diary_id=d.id_diary  # ID del diario a cui associare l'evento
+   )
+   
+   # Modifica del periodo dell'evento periodico
+   period.change_period(
+       event_period,
+       start=period.get_period_from(2023, 8, 1, 10, 0),
+       end=period.get_period_to(2024, 10, 31, 10, 0)
+   )
+   
+   # Modifica della descrizione dell'evento periodico
+   period.modify_period_description(
+       event_period,
+       new_description='My first event period modify'
+   )
+   
+   # Attiva o disattiva l'evento periodico
+   period.switch_do_period(event_period)
+
+9. **Utilizzo della Classe per Inserire Eventi nel Diario**
+   
+   ```sh
+   
+   d.put_event_diary(my_event)
+
+10. **Utilizzo del modulo diary_txt**
+Consente di stampare tutti gli eventi inseriti nel diario in un documento .txt
+   
+   ```sh
+   d.convert_diary_str()
+
+11. **Utilizzo del modulo diary_excell**
+Consente di creare un file xlsx per registrare tutti gli eventi inseriti nel diario
+   
+   ```sh
+   diary.diary_excel.save_diary_excel('excel_angelo.xlsx',d.diary)
+
+12. **Ordinamento eventi diario per nome o per data**
+   ```sh
+   from diary import Diario
+   from event import Evento
+   from datetime import datetime
+   
+   # Crea l'oggetto Diario
+   my_diary = Diario()
+   
+   # Aggiungi alcuni eventi
+   my_diary.aggiungi_evento(Evento('Meeting', 'Discuss project', datetime(2024, 8, 15, 10, 0), datetime(2024, 8, 15, 11, 0)))
+   my_diary.aggiungi_evento(Evento('Dentist', 'Teeth check-up', datetime(2024, 8, 16, 9, 0), datetime(2024, 8, 16, 10, 0)))
+   my_diary.aggiungi_evento(Evento('Lunch', 'Lunch with friends', datetime(2024, 8, 14, 12, 0), datetime(2024, 8, 14, 13, 0)))
+   
+   # Ordina gli eventi per data di inizio in ordine crescente
+   my_diary.orderby_startdata(order='crescente')
+   for evento in my_diary.get_all_events():
+       print(evento.title, evento.date_start)
+   
+   # Ordina gli eventi per data di inizio in ordine decrescente
+   my_diary.orderby_startdata(order='decrescente')
+   for evento in my_diary.get_all_events():
+       print(evento.title, evento.date_start)
+   
+   # Ordina gli eventi per nome in ordine crescente
+   my_diary.orderby_name_event(order='crescente')
+   for evento in my_diary.get_all_events():
+       print(evento.title)
+   
+   # Ordina gli eventi per nome in ordine decrescente
+   my_diary.orderby_name_event(order='decrescente')
+   for evento in my_diary.get_all_events():
+       print(evento.title)
+
+

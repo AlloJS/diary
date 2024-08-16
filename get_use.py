@@ -6,6 +6,7 @@ from diary import period
 import diary.diary_excel
 
 d = DiarySQL('My diary','localhost','Diary','root','root')
+d2 = Diary('Name')
 print(d.__dict__)
 
 # Operation to daily module
