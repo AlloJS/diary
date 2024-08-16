@@ -17,33 +17,41 @@ La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di 
 
    ```sh
    git clone https://github.com/AlloJS/Diary.git
-2. **Installazione delle dipendenze**
+   cd tuo-repository
+   
+2. **Crea ambiente virtuale**
+
+   ```sh
+   python -m venv env
+   source env/bin/activate  # Su Windows usa: .\env\Scripts\activate
+
+3. **Installazione delle dipendenze**
 
    ```sh
    pip install -r requirements.txt
 
-3. **Crea le Tabelle nel Database MySQL**
+4. **Crea le Tabelle nel Database MySQL**
 
    *Esegui il comando seguente per creare le tabelle nel database specificato. 
    Sostituisci myuser, mypassword, e mydatabase con le tue credenziali e il nome del database.*
    
    ```sh
     python create_tables.py --user=myuser --password=mypassword --database=mydatabase
-4. **Inizia a Usare la Libreria con il Database Sceglto**
+5. **Inizia a Usare la Libreria con il Database Sceglto**
 
    ```sh
    from diary.diary_sql import DiarySQL
    
    d = DiarySQL('<Name diary>','<host>','Diary','<user>','<password>')
 
-5. **Uso della Libreria Senza Database**
+6. **Uso della Libreria Senza Database**
 
    ```sh
    from diary.diary import Diary
    
    d = Diary('<Name diary>')
 
-6. **Utilizzo del modulo daily per gestire eventi giornalieri**
+7. **Utilizzo del modulo daily per gestire eventi giornalieri**
    
    ```sh
    import daily
@@ -82,7 +90,7 @@ La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di 
    new_description='My first daily event modify'
    )
 
-7. **Utilizzo del modulo monthly per gestire eventi mensili**
+8. **Utilizzo del modulo monthly per gestire eventi mensili**
    
    ```sh
    import monthly
@@ -113,7 +121,7 @@ La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di 
        new_description='My first event monthly modify'
    )
 
-8. **Utilizzo del modulo period per gestire eventi di un determinato periodo**
+9. **Utilizzo del modulo period per gestire eventi di un determinato periodo**
    
    ```sh
    import period
@@ -144,25 +152,25 @@ La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di 
    # Attiva o disattiva l'evento periodico
    period.switch_do_period(event_period)
 
-9. **Utilizzo della Classe per Inserire Eventi nel Diario**
+10. **Utilizzo della Classe per Inserire Eventi nel Diario**
    
    ```sh
    
    d.put_event_diary(my_event)
 
-10. **Utilizzo del modulo diary_txt**
+11. **Utilizzo del modulo diary_txt**
 Consente di stampare tutti gli eventi inseriti nel diario in un documento .txt
    
    ```sh
    d.convert_diary_str()
 
-11. **Utilizzo del modulo diary_excell**
+12. **Utilizzo del modulo diary_excell**
 Consente di creare un file xlsx per registrare tutti gli eventi inseriti nel diario
    
    ```sh
    diary.diary_excel.save_diary_excel('excel_angelo.xlsx',d.diary)
 
-12. **Ordinamento eventi diario per nome o per data**
+13. **Ordinamento eventi diario per nome o per data**
    ```sh
    from diary import Diario
    from event import Evento
