@@ -4,13 +4,13 @@ from mysql.connector import Error
 from .generator_UID import _generate_random_id
 from datetime import datetime
 class DiarySQL(Diary):
-    def __init__(self,name,host,database,user,password):
+    def __init__(self,name='default',host='',database='',user='',password='',id_diary='default'):
         super().__init__(name)
         self.host = host
         self.database = database
         self.user = user
         self.password = password
-        self.id_diary = _generate_random_id()
+        self.id_diary = self.start_diary(id_diary)
         self.write_DB_diary_creation()
 
     def _create_connection(self):
@@ -26,11 +26,55 @@ class DiarySQL(Diary):
                 password=self.password
             )
             if connection.is_connected():
-                print("Connessione al database MySQL avvenuta con successo")
+                pass
 
                 return connection
         except Error as e:
             print(e)
+
+    def start_diary(self,id_diary):
+        """
+        Permette di cominciare e verificare se il diario esiste già nel database selezionato
+        :param id_diary:
+        :type str
+        :return: Ri torna o l'id del diario esistente oppure ne crea uno nuovo
+        """
+        if id_diary == 'default':
+            return _generate_random_id()
+        else:
+            list_id_diary = self.read_is_diary_exsist()
+            is_find = True if id_diary in list_id_diary else False
+
+            if is_find == False:
+                raise ValueError('Il diario da te cercato non esiste')
+
+            return self._select_diary_DB(id_diary)
+
+
+    def _select_diary_DB(self,id_diary):
+        """
+        Metodo interno che seleziona l'id nella lista degli id del diario nel database
+        :param id_diary:
+        :type str
+        :return: RItorna l'id del diario selezionato
+        """
+        conn = self._create_connection()
+        cursor = conn.cursor()
+        query = f"SELECT id_diary FROM Diary WHERE id_diary = {id_diary}"
+        cursor.execute(query)
+        id_diary_selectd = cursor.fetchall()
+        self._charge_events(id_diary)
+        return id_diary_selectd[0][0]
+
+    def _charge_events(self, id_diary):
+        """
+        Carica gli eventi del diario selezionato nella variabile d'istanza
+        :param id_diary: Id con cui viene individuato
+        :return: RItorna la variabile di istanza popolata degli eventi associati
+        """
+        list_events = self.read_events_DB(id_diary)
+        self.diary = list_events
+        return self.diary
 
     def write_DB_diary_creation(self):
         """
@@ -43,7 +87,7 @@ class DiarySQL(Diary):
             values = list()
             cursor = conn.cursor()
             list_diary = self.read_is_diary_exsist()
-            check_univoc_id = list(map(lambda x: x['id_diary'], list_diary))
+            check_univoc_id = list(map(lambda x: x, list_diary))
             date_creation_str = self.date_creation.strftime("%Y-%m-%d %H:%M:%S")
             date_creation_datetime = datetime.fromisoformat(date_creation_str)
             date_creation_formattata = date_creation_datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -57,7 +101,7 @@ class DiarySQL(Diary):
                 conn.commit()
                 values = list()
             else:
-                print(f'Queesto diario {self.name} con id univoco {self.id_diary} risulta già inserito in Data Base')
+                print(f'Selezionato diario {self.name} con id univoco {self.id_diary}')
 
         except Error as e:
             print("Scrittura non effettuata",e)
@@ -72,81 +116,87 @@ class DiarySQL(Diary):
         query = "SELECT id_diary FROM Diary"
         cursor.execute(query)
         rows = cursor.fetchall()
-        list_diaries = [row for row in rows]
-        dict_diary = {}
-        list_diary = []
-
-        for diary in list_diaries:
-            dict_diary['id_diary'] = diary[0]
-
+        list_diaries = [row[0] for row in rows]
         cursor.close()
         conn.close()
-        return list_diary
+        return list_diaries
 
     def write_events_DB(self):
         """
-        Metodo che consente di scrivere l'intero diario sul DB
-        :return: Ritorna la riuscita della scrittura in database
+        Metodo che consente di scrivere l'intero diario sul DB.
+        :return: Ritorna la riuscita della scrittura in database.
         """
         conn = self._create_connection()
-        query = "INSERT INTO Event (univoc_id,id_diary,name,description,date_start,date_and,do,repeat_event,calendar) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        values = list()
+        query = """
+            INSERT INTO Event (univoc_id, id_diary, name, description, date_start, date_and, do, repeat_event, calendar)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
         cursor = conn.cursor()
 
         try:
             list_diary = self.read_events_DB()
-            check_univoc_id = list(map(lambda x: x['univoc_id'], list_diary))
+            check_univoc_id = set(map(lambda x: x['univoc_id'], list_diary))  # Usa un set per cercare più velocemente
 
             for event in self.diary:
-                #Creo lista per dati
-                if str(event['univoc_id']) not in check_univoc_id:
-                    values.append(str(event['univoc_id']))
-                    values.append(str(event['id_diary']))
-                    values.append(event['name'])
-                    values.append(event['description'])
-                    values.append(event['date start'])
-                    values.append(event['date start'])
-                    values.append(event['do'])
-                    values.append(0)
-                    values.append(event['calendar'][0])
-                    #Trasformo tupla per passare dati al cursore
-                    values = tuple(values)
-                    cursor.execute(query,values)
+                univoc_id = str(event['univoc_id'])
+                if univoc_id not in check_univoc_id:
+                    values = (
+                        univoc_id,
+                        str(event['id_diary']),
+                        event['name'],
+                        event['description'],
+                        event['date start'],
+                        event['date and'],
+                        event['do'],
+                        event.get('repeat_event', 0),
+                        event['calendar'][0]
+                    )
+                    cursor.execute(query, values)
                     conn.commit()
-                    values = list()
                 else:
-                    print(f'Queesto evento {event['name']} con id univoco {event['univoc_id']} risulta già inserito in Data Base')
+                    print(
+                        f"Questo evento '{event['name']}' con id univoco {univoc_id} risulta già inserito in Data Base")
 
-            print('Record inserito con successo')
+            print('Record inseriti con successo')
         except Error as e:
-            print("Scrittura non effettuata",e)
+            print("Scrittura non effettuata:", e)
+            conn.rollback()
+        finally:
+            cursor.close()
+            conn.close()
 
-    def read_events_DB(self):
+    def read_events_DB(self, id_diary=None):
         conn = self._create_connection()
-        cursor = conn.cursor()
-        query = "SELECT * FROM Event"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        list_event = [row for row in rows]
-        dict_event = {}
-        list_diary = []
+        try:
+            cursor = conn.cursor()
 
-        for evnet in list_event:
-            dict_event['id'] = evnet[0]
-            dict_event['univoc_id'] = evnet[1]
-            dict_event['id_diary'] = evnet[2]
-            dict_event['name'] = evnet[3]
-            dict_event['description'] = evnet[4]
-            dict_event['date start'] = evnet[5]
-            dict_event['date and'] = evnet[6]
-            dict_event['do'] = evnet[7]
-            dict_event['repeat'] = evnet[8]
-            dict_event['calendar'] = evnet[9]
-            list_diary.append(dict_event)
-            dict_event = {}
+            if id_diary is None:
+                query = "SELECT * FROM Event"
+                cursor.execute(query)
+            else:
+                query = "SELECT * FROM Event WHERE id_diary = %s"
+                cursor.execute(query, (id_diary,))
 
-        cursor.close()
-        conn.close()
+            rows = cursor.fetchall()
+
+            list_diary = [
+                {
+                    'univoc_id': row[1],
+                    'id_diary': row[2],
+                    'name': row[3],
+                    'description': row[4],
+                    'date_start': row[5],
+                    'date_and': row[6],
+                    'do': row[7],
+                    'repeat': row[8],
+                    'calendar': row[9]
+                }
+                for row in rows
+            ]
+        finally:
+            cursor.close()
+            conn.close()
+
         return list_diary
 
 

@@ -139,11 +139,11 @@
 <span id="diary-diary-db-module"></span><h2>diary.diary_DB module<a class="headerlink" href="#module-diary.diary_DB" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="diary.diary_DB.DiarySQL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.diary_DB.</span></span><span class="sig-name descname"><span class="pre">DiarySQL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.diary_DB.</span></span><span class="sig-name descname"><span class="pre">DiarySQL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_diary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#diary.new_diary.Diary" title="diary.new_diary.Diary"><code class="xref py py-class docutils literal notranslate"><span class="pre">Diary</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="diary.diary_DB.DiarySQL.read_events_DB">
-<span class="sig-name descname"><span class="pre">read_events_DB</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.read_events_DB" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read_events_DB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_diary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.read_events_DB" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -151,6 +151,15 @@
 <span class="sig-name descname"><span class="pre">read_is_diary_exsist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.read_is_diary_exsist" title="Link to this definition">¶</a></dt>
 <dd><p>Legge per verificare se un diario è gia stato registrato
 :return: Ritorna la lista di tutti gli id univoci esistenti in database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.diary_DB.DiarySQL.start_diary">
+<span class="sig-name descname"><span class="pre">start_diary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_diary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.start_diary" title="Link to this definition">¶</a></dt>
+<dd><p>Permette di cominciare e verificare se il diario esiste già nel database selezionato
+:param id_diary:
+:type str
+:return: Ri torna o l’id del diario esistente oppure ne crea uno nuovo</p>
 </dd></dl>
 
 <dl class="py method">
@@ -163,8 +172,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="diary.diary_DB.DiarySQL.write_events_DB">
 <span class="sig-name descname"><span class="pre">write_events_DB</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.write_events_DB" title="Link to this definition">¶</a></dt>
-<dd><p>Metodo che consente di scrivere l’intero diario sul DB
-:return: Ritorna la riuscita della scrittura in database</p>
+<dd><p>Metodo che consente di scrivere l’intero diario sul DB.
+:return: Ritorna la riuscita della scrittura in database.</p>
 </dd></dl>
 
 </dd></dl>
