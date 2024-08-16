@@ -75,7 +75,7 @@ def get_period_to(year,month,day,hour,minute)->dict:
     except ErrorDate as ed:
         print(ed.message)
 
-def period_note(name,description,period_from: dict,period_to: dict,do):
+def period_note(name,description,period_from: dict,period_to: dict,do,id_diary):
     """
     Crea una voce di diario per un periodo specifico.
     :param name: Nome per periodo di partenza
@@ -88,6 +88,8 @@ def period_note(name,description,period_from: dict,period_to: dict,do):
     :type period_to dict
     :param do: Stato della voce del diario (True o False).
     :type do Bool
+    :param id_diary: Id univoco riferito al diario.
+    :type id_diary: str
     :return: Ritorna un evento scelto in un certo periodo
     """
     try:
@@ -128,6 +130,7 @@ def period_note(name,description,period_from: dict,period_to: dict,do):
 
         obj_period = {
             'univoc_id': _generate_random_id(),
+            'id_diary': id_diary,
             'name': name,
             'description': description,
             'date start': date_from_format,

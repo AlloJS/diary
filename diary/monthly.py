@@ -7,7 +7,7 @@ import datetime
 import calendar
 from .generator_UID import _generate_random_id
 
-def monthly_note(name,description,year,month,do):
+def monthly_note(name,description,year,month,do,id_diary):
     """
     Crea una voce di diario per un mese specifico.
 
@@ -19,6 +19,8 @@ def monthly_note(name,description,year,month,do):
     :type description: str
     :param do: Stato della voce del diario (True o False).
     :type do: bool
+    :param id_diary: Id univoco riferito al diario.
+    :type id_diary: str
     :return: Un dizionario che rappresenta la voce del diario, contenente il mese e l'anno formattati, la descrizione, lo stato e il calendario del mese.
     :rtype: dict
     :raises ErrorDate: Se il mese o il giorno non sono validi.
@@ -35,6 +37,7 @@ def monthly_note(name,description,year,month,do):
 
         obj_monthly = {
             'univoc_id': _generate_random_id(),
+            'id_diary': id_diary,
             'name': name,
             'description': description,
             'date start': date_start,

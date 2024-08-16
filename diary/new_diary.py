@@ -1,7 +1,7 @@
 import datetime
 from dateutil import tz
 from diary.diary_except import ErrorAllowedValue
-
+from .generator_UID import _generate_random_id
 class Diary:
     """
     Costruzione di un nuovo diario per la registrazione degli eventi
@@ -17,6 +17,7 @@ class Diary:
         self.name = name
         self.diary = []
         self.date_creation = self._set_data_creation()
+        self.id_diary = _generate_random_id()
 
     def __str__(self):
         """

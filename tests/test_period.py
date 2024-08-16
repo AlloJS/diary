@@ -59,10 +59,11 @@ def test_period_note():
                 for month in range(1, period_to['month'] + 1):
                     calendar_period.append(calendar.month(year, month))
 
-    obj_period = period_note(name,description,period_from,period_to,do)
+    obj_period = period_note(name,description,period_from,period_to,do,'67890')
 
     expected_result = {
         'univoc_id' : obj_period['univoc_id'],
+        'id_diary' : obj_period['id_diary'],
         'name': name,
         'description': description,
         'date start': date_from_format,
@@ -77,7 +78,7 @@ def test_period_note():
 def test_change_period():
     period_from = get_period_from(2024, 11, 10, 10, 30)
     period_to = get_period_to(2027, 3, 1, 23, 30)
-    obj = period_note('Test periodo', 'Test evento periodo da a', period_from, period_to, False)
+    obj = period_note('Test periodo', 'Test evento periodo da a', period_from, period_to, False,'78909')
 
     period_from2 = get_period_from(2023, 12, 9, 9, 0)
     period_to2 = get_period_to(2029, 5, 18, 7, 40)
@@ -115,13 +116,13 @@ def test_modify_period_description():
     description = 'New description'
     new_event_period_from = get_period_from(2024, 11, 10, 10, 30)
     new_event_period_to = get_period_to(2027, 3, 1, 23, 30)
-    obj = period_note('Test periodo','Test evento periodo da a',new_event_period_from,new_event_period_to,False)
+    obj = period_note('Test periodo','Test evento periodo da a',new_event_period_from,new_event_period_to,False,'987654')
     modify_period_description(obj,description)
     assert obj['description'] == description
 
 def test_switch_do_period():
     new_event_period_from = get_period_from(2024, 11, 10, 10, 30)
     new_event_period_to = get_period_to(2027, 3, 1, 23, 30)
-    obj = period_note('Test periodo', 'Test evento periodo da a', new_event_period_from, new_event_period_to, False)
+    obj = period_note('Test periodo', 'Test evento periodo da a', new_event_period_from, new_event_period_to, False,'765435')
     switch_do_period(obj)
     assert obj['do'] == True

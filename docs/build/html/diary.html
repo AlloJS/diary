@@ -40,7 +40,7 @@
 <span id="diary-daily-module"></span><h2>diary.daily module<a class="headerlink" href="#module-diary.daily" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.daily.daily_note">
-<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">daily_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minut_duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.daily_note" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.daily.</span></span><span class="sig-name descname"><span class="pre">daily_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minut_duration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_diary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.daily.daily_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per una data specifica.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -54,6 +54,7 @@
 <li><p><strong>description</strong> (<em>str</em>) – Descrizione della voce del diario.</p></li>
 <li><p><strong>minut_duration</strong> (<em>int</em>) – Imposta la durata in minuti dell’evento.</p></li>
 <li><p><strong>do</strong> (<em>bool</em>) – Stato della voce del diario (True o False).</p></li>
+<li><p><strong>id_diary</strong> (<em>str</em>) – ID del diario a cui collegare evento.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -140,6 +141,25 @@
 <dt class="sig sig-object py" id="diary.diary_DB.DiarySQL">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">diary.diary_DB.</span></span><span class="sig-name descname"><span class="pre">DiarySQL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#diary.new_diary.Diary" title="diary.new_diary.Diary"><code class="xref py py-class docutils literal notranslate"><span class="pre">Diary</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.diary_DB.DiarySQL.read_events_DB">
+<span class="sig-name descname"><span class="pre">read_events_DB</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.read_events_DB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.diary_DB.DiarySQL.read_is_diary_exsist">
+<span class="sig-name descname"><span class="pre">read_is_diary_exsist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.read_is_diary_exsist" title="Link to this definition">¶</a></dt>
+<dd><p>Legge per verificare se un diario è gia stato registrato
+:return: Ritorna la lista di tutti gli id univoci esistenti in database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="diary.diary_DB.DiarySQL.write_DB_diary_creation">
+<span class="sig-name descname"><span class="pre">write_DB_diary_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.write_DB_diary_creation" title="Link to this definition">¶</a></dt>
+<dd><p>Crea la riga diario su database con il suo codice univoco
+:return: None</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="diary.diary_DB.DiarySQL.write_events_DB">
 <span class="sig-name descname"><span class="pre">write_events_DB</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.DiarySQL.write_events_DB" title="Link to this definition">¶</a></dt>
@@ -253,7 +273,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.monthly.monthly_note">
-<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">monthly_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.monthly_note" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.monthly.</span></span><span class="sig-name descname"><span class="pre">monthly_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">month</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_diary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.monthly.monthly_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per un mese specifico.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -262,6 +282,7 @@
 <li><p><strong>month</strong> (<em>int</em>) – Mese della data del diario (1-12).</p></li>
 <li><p><strong>description</strong> (<em>str</em>) – Descrizione della voce del diario.</p></li>
 <li><p><strong>do</strong> (<em>bool</em>) – Stato della voce del diario (True o False).</p></li>
+<li><p><strong>id_diary</strong> (<em>str</em>) – Id univoco riferito al diario.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -393,7 +414,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="diary.period.period_note">
-<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">period_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.period_note" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">diary.period.</span></span><span class="sig-name descname"><span class="pre">period_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_from</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_diary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.period.period_note" title="Link to this definition">¶</a></dt>
 <dd><p>Crea una voce di diario per un periodo specifico.
 :param name: Nome per periodo di partenza
 :type name str
@@ -405,6 +426,8 @@
 :type period_to dict
 :param do: Stato della voce del diario (True o False).
 :type do Bool
+:param id_diary: Id univoco riferito al diario.
+:type id_diary: str
 :return: Ritorna un evento scelto in un certo periodo</p>
 </dd></dl>
 
