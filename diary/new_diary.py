@@ -1,7 +1,7 @@
 import datetime
 from dateutil import tz
-from diary.diary_except import ErrorAllowedValue
 from .generator_UID import _generate_random_id
+from .diary_except import ErrorAllowedValue
 class Diary:
     """
     Costruzione di un nuovo diario per la registrazione degli eventi
@@ -88,7 +88,7 @@ class Diary:
             else:
                 raise ErrorAllowedValue('I valori consentiti sono solo crescente o decrescente')
 
-            self.diary = list(sorted(self.diary,key=lambda x: x['date start'],reverse=verse))
+            self.diary = list(sorted(self.diary,key=lambda x: x['date_start'],reverse=verse))
             return self.diary
 
         except ErrorAllowedValue as err:
