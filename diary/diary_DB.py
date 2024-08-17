@@ -4,7 +4,7 @@ from mysql.connector import Error
 from .generator_UID import _generate_random_id
 from datetime import datetime
 class DiarySQL(Diary):
-    def __init__(self,name='default',host='',database='',user='',password='',id_diary='default'):
+    def __init__(self,name=None,host=None,database=None,user=None,password=None,id_diary=None):
         super().__init__(name)
         self.host = host
         self.database = database
@@ -39,7 +39,7 @@ class DiarySQL(Diary):
         :type str
         :return: Ri torna o l'id del diario esistente oppure ne crea uno nuovo
         """
-        if id_diary == 'default':
+        if id_diary is None:
             return _generate_random_id()
         else:
             list_id_diary = self.read_is_diary_exsist()
@@ -75,6 +75,22 @@ class DiarySQL(Diary):
         list_events = self.read_events_DB(id_diary)
         self.diary = list_events
         return self.diary
+
+    def set_name(self,id_diary):
+        """
+        Metodo che consente di usare il nome preso dal database associato al'id del diario
+        :param id_diary: Id del diario da associare al nome
+        :return: Ritorna il nome selezionato
+        """
+        conn = self._create_connection()
+        cursor = conn.cursor()
+        query = f"SELECT Name FROM Diary WHERE id_diary = {id_diary}"
+        print(f"SELECT Name FROM Diary WHERE id_diary = '{id_diary}'")
+        cursor.execute(query)
+        name_diary_selectd = cursor.fetchall()
+        self.name = name_diary_selectd[0][0]
+
+
 
     def write_DB_diary_creation(self):
         """
