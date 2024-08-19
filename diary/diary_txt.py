@@ -1,4 +1,3 @@
-from diary.new_diary import Diary
 import os
 import io
 import errno

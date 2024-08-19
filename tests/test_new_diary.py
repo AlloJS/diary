@@ -1,101 +1,132 @@
-from diary.new_diary import Diary
-from diary.daily import daily_note
-from unittest.mock import patch
-from diary.diary_except import ErrorAllowedValue
+import pytest
 import datetime
-from dateutil import tz
-import calendar
-
-def test_put_event_diary():
-    obj_diary = Diary('Diary test')
-    event = daily_note('Event','Descr event',2024,10,1,18,45,60,False)
-    obj_diary.put_event_diary(event)
-    assert len(obj_diary.diary) != 0
-    assert obj_diary.diary[0] == event
-
-def test_convert_diary_str():
-    obj_diary = Diary('Diary test')
-    event = daily_note('Event', 'Descr event', 2024, 10, 1, 18, 45, 60, False)
-    obj_diary.put_event_diary(event)
-    string = obj_diary.convert_diary_str()
-
-    assert type(string) == str
-
+import pytz.tzinfo
+from ..diary.new_diary import (
+    _set_data_creation,
+    create_diary,
+    put_event_diary,
+    convert_diary_str,
+    orderby_startdata,
+    orderby_name_event
+)
+from ..diary.diary_except import ErrorAllowedValue
 
 def test_set_data_creation():
-    # Istanzia la tua classe
-    obj = Diary('Diary test')
-    # Definisci la data e ora fittizia che il mock restituirà
-    mock_now = datetime.datetime(2024, 8, 15, 10, 30, tzinfo=datetime.timezone.utc)
-    # Usa patch per mockare datetime.datetime.now
-    with patch('diary.new_diary.datetime.datetime') as mock_datetime:
-        mock_datetime.now.return_value = mock_now
-        # Chiama la funzione da testare
-        result = obj._set_data_creation()
-    # Verifica che la data creata sia quella mockata
-    assert result == mock_now
-    assert obj.date_creation == mock_now
+    data_creazione = _set_data_creation()
+    assert isinstance(data_creazione, datetime.datetime)
+    assert data_creazione.tzinfo is not None
+    assert data_creazione.tzinfo.tzname(data_creazione) == 'CEST'  # Central European Summer Time
+
+
+
+def test_create_diary():
+    name = "Test Diary"
+    diary = create_diary(name)
+
+    assert isinstance(diary, dict)
+    assert diary['name'] == name
+    assert isinstance(diary['diary'], list)
+    assert isinstance(diary['date_creation'], datetime.datetime)
+    assert len(diary['id_diary']) > 0  # Assumendo che l'ID non sia una stringa vuota
+
+
+def test_put_event_diary():
+    diary = create_diary("Test Diary")
+    event = {
+        'name': 'Meeting',
+        'description': 'Discussione importante',
+        'date start': '2024-08-20 15:30:00',
+        'date and': '2024-08-20 16:30:00',
+        'do': False
+    }
+
+    updated_diary = put_event_diary(diary, event)
+
+    assert len(updated_diary['diary']) == 1
+    assert updated_diary['diary'][0] == event
+
+
+def test_convert_diary_str():
+    diary = create_diary("Test Diary")
+    event = {
+        'name': 'Meeting',
+        'description': 'Discussione importante',
+        'date start': '2024-08-20 15:30:00',
+        'date and': '2024-08-20 16:30:00',
+        'do': False
+    }
+    put_event_diary(diary, event)
+
+    diary_str = convert_diary_str(diary)
+
+    assert isinstance(diary_str, str)
+    assert "PERIODO: dal: 20 August 2024 15:30:00" in diary_str
+    assert "NOME: Meeting" in diary_str
+    assert "DESCRIZIONE: Discussione importante" in diary_str
+    assert "SVOLTO: Da svolgere" in diary_str
+
 
 def test_orderby_startdata():
-    obj = Diary('Diary test')
-    obj2 = Diary('Diary Order Test')
+    diary = create_diary("Test Diary")
     event1 = {
-        'univoc_id': '212121',
-        'name': 'E1',
-        'description': 'description e1',
-        'date start': '2024-08-15 15:00:00',
-        'date and': '2024-08-15 16:00:00',
-        'do': True,
-        'repeat': False,
-        'calendar': [calendar.month(2024, 8)]
+        'name': 'Meeting 1',
+        'description': 'Discussione importante',
+        'date start': '2024-08-19 14:30:00',
+        'date and': '2024-08-19 15:30:00',
+        'do': False
     }
     event2 = {
-        'univoc_id': '212121',
-        'name': 'E2',
-        'description': 'description e2',
-        'date start': '2023-08-15 15:00:00',
-        'date and': '2023-08-15 16:00:00',
-        'do': True,
-        'repeat': False,
-        'calendar': [calendar.month(2023, 8)]
+        'name': 'Meeting 2',
+        'description': 'Altro incontro',
+        'date start': '2024-08-20 16:00:00',
+        'date and': '2024-08-20 17:00:00',
+        'do': False
     }
+    put_event_diary(diary, event1)
+    put_event_diary(diary, event2)
 
-    obj.put_event_diary(event1)
-    obj.put_event_diary(event2)
-    obj.orderby_startdata('decrescente')
-    obj2.put_event_diary(event2)
-    obj2.put_event_diary(event1)
+    # Test ordine crescente
+    diary_sorted = orderby_startdata(diary, 'crescente')
+    assert diary_sorted['diary'][0]['name'] == 'Meeting 1'
 
-    assert obj.diary[0] == obj2.diary[0]
+    # Test ordine decrescente
+    diary_sorted = orderby_startdata(diary, 'decrescente')
+    assert diary_sorted['diary'][0]['name'] == 'Meeting 2'
+
+    # Test errore con ordine non valido
+    with pytest.raises(ErrorAllowedValue):
+        orderby_startdata(diary, 'non valido')
+
+
+
 
 def test_orderby_name_event():
-    obj = Diary('Diary test')
-    obj2 = Diary('Diary Order Test')
+    diary = create_diary("Test Diary")
     event1 = {
-        'univoc_id': '212121',
-        'name': 'E1',
-        'description': 'description e1',
-        'date start': '2024-08-15 15:00:00',
-        'date and': '2024-08-15 16:00:00',
-        'do': True,
-        'repeat': False,
-        'calendar': [calendar.month(2024, 8)]
+        'name': 'Zeta Meeting',
+        'description': 'Discussione importante',
+        'date start': '2024-08-19 14:30:00',
+        'date and': '2024-08-19 15:30:00',
+        'do': False
     }
     event2 = {
-        'univoc_id': '212121',
-        'name': 'E2',
-        'description': 'description e2',
-        'date start': '2023-08-15 15:00:00',
-        'date and': '2023-08-15 16:00:00',
-        'do': True,
-        'repeat': False,
-        'calendar': [calendar.month(2023, 8)]
+        'name': 'Alpha Meeting',
+        'description': 'Altro incontro',
+        'date start': '2024-08-20 16:00:00',
+        'date and': '2024-08-20 17:00:00',
+        'do': False
     }
+    put_event_diary(diary, event1)
+    put_event_diary(diary, event2)
 
-    obj.put_event_diary(event1)
-    obj.put_event_diary(event2)
-    obj.orderby_name_event('crescente')
-    obj2.put_event_diary(event2)
-    obj2.put_event_diary(event1)
+    # Test ordine crescente
+    diary_sorted = orderby_name_event(diary, 'crescente')
+    assert diary_sorted['diary'][0]['name'] == 'Alpha Meeting'
 
-    assert obj.diary[0] == obj2.diary[0]
+    # Test ordine decrescente
+    diary_sorted = orderby_name_event(diary, 'decrescente')
+    assert diary_sorted['diary'][0]['name'] == 'Zeta Meeting'
+
+    # Test errore con ordine non valido
+    with pytest.raises(ErrorAllowedValue):
+        orderby_name_event(diary, 'non valido')

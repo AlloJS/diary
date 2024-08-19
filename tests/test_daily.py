@@ -1,5 +1,4 @@
-import pytest
-from diary.daily import daily_note,modify_daily_date,modify_description_daily,switch_do_daily
+from ..diary.daily import daily_note,modify_daily_date,modify_description_daily,switch_do_daily
 import datetime
 from dateutil import tz
 import calendar

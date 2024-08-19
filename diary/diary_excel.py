@@ -1,5 +1,4 @@
 import pandas as pd
-
 def save_diary_excel(path,diary):
     """
     Salvare file excel del riepilogo diario

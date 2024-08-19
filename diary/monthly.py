@@ -1,11 +1,13 @@
 try:
     from .diary_except import ErrorDate  # Importazione relativa per Sphinx
+    from .generator_UID import _generate_random_id
 except ImportError:
     from diary_except import ErrorDate   # Importazione assoluta per l'esecuzione normale
+    from generator_UID import _generate_random_id
 
 import datetime
 import calendar
-from .generator_UID import _generate_random_id
+
 
 def monthly_note(name,description,year,month,do,id_diary):
     """

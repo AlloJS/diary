@@ -1,12 +1,14 @@
 try:
     from .diary_except import ErrorDate  # Importazione relativa per Sphinx
+    from .generator_UID import _generate_random_id
 except ImportError:
     from diary_except import ErrorDate   # Importazione assoluta per l'esecuzione normale
+    from generator_UID import _generate_random_id
 
 import datetime
 import calendar
 from dateutil import tz
-from .generator_UID import _generate_random_id
+
 
 def get_period_from(year,month,day,hour,minute)->dict:
     """

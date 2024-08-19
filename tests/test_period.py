@@ -1,5 +1,5 @@
 import pytest
-from diary.period import get_period_from,get_period_to,period_note,modify_period_description,change_period,switch_do_period
+from ..diary.period import get_period_from,get_period_to,period_note,modify_period_description,change_period,switch_do_period
 import datetime
 from dateutil import tz
 import calendar

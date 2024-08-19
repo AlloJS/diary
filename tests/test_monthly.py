@@ -1,5 +1,5 @@
 import pytest
-from diary.monthly import monthly_note,modify_monthly_month,modify_monthly_description,switch_do_monthly
+from ..diary.monthly import monthly_note,modify_monthly_month,modify_monthly_description,switch_do_monthly
 import datetime
 import calendar
 
