@@ -37,14 +37,14 @@ La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di 
    
    ```sh
     python create_tables.py --user=myuser --password=mypassword --database=mydatabase
-5. **Inizia a Usare la Libreria con il Database Sceglto**
+5. **Inizia a Usare la Libreria senza il Database Sceglto**
 
    ```sh
-   from diary.diary_sql import DiarySQL
-   
-   d = DiarySQL('<Name diary>','<host>','Diary','<user>','<password>')
+   from diary.new_diary import create_diary
+   name_diary = 'New My Diary'
+   diary = create_diary(name_diary)
 
-6. **Uso della Libreria Senza Database**
+6. **Uso della Libreria con Database**
 
    ```sh
    from diary.diary import Diary
@@ -96,91 +96,102 @@ La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di 
 
 8. **Utilizzo del modulo monthly per gestire eventi mensili**
    
-   ```sh
-   import monthly
+      ```sh
+      import monthly
    
-   # Creazione di un nuovo evento mensile
-   monthly_event = monthly.monthly_note(
-       title='Monthly Event',
-       description='My first monthly event',
-       year=2024,
-       month=8,
-       is_recurring=False,  # Evento ricorrente o meno
-       diary_id=d.id_diary  # ID del diario a cui associare l'evento
-   )
+      # Creazione di un nuovo evento mensile
+      monthly_event = monthly.monthly_note(
+          title='Monthly Event',
+          description='My first monthly event',
+          year=2024,
+          month=8,
+          is_recurring=False,  # Evento ricorrente o meno
+          diary_id=d.id_diary  # ID del diario a cui associare l'evento
+      )
    
-   # Modifica del mese dell'evento mensile
-   monthly.modify_monthly_month(
-       monthly_event,
-       year=2024,
-       month=7  # Nuovo mese
-   )
+      # Modifica del mese dell'evento mensile
+      monthly.modify_monthly_month(
+          monthly_event,
+          year=2024,
+          month=7  # Nuovo mese
+      )
    
-   # Attiva o disattiva l'evento mensile
-   monthly.switch_do_monthly(monthly_event)
+      # Attiva o disattiva l'evento mensile
+      monthly.switch_do_monthly(monthly_event)
    
-   # Modifica della descrizione dell'evento mensile
-   monthly.modify_monthly_description(
-       monthly_event,
-       new_description='My first event monthly modify'
-   )
+      # Modifica della descrizione dell'evento mensile
+      monthly.modify_monthly_description(
+          monthly_event,
+          new_description='My first event monthly modify'
+      )
 
 9. **Utilizzo del modulo period per gestire eventi di un determinato periodo**
    
-   ```sh
-   import period
+      ```sh
+      import period
    
-   # Creazione di un nuovo evento periodico
-   event_period = period.period_note(
-       title='Period event',
-       description='My first event period',
-       start=period.get_period_from(2024, 8, 1, 10, 0),
-       end=period.get_period_to(2024, 8, 31, 10, 0),
-       is_recurring=False,  # Evento ricorrente o meno
-       diary_id=d.id_diary  # ID del diario a cui associare l'evento
-   )
+      # Creazione di un nuovo evento periodico
+      event_period = period.period_note(
+          title='Period event',
+          description='My first event period',
+          start=period.get_period_from(2024, 8, 1, 10, 0),
+          end=period.get_period_to(2024, 8, 31, 10, 0),
+          is_recurring=False,  # Evento ricorrente o meno
+          diary_id=d.id_diary  # ID del diario a cui associare l'evento
+      )
    
-   # Modifica del periodo dell'evento periodico
-   period.change_period(
-       event_period,
-       start=period.get_period_from(2023, 8, 1, 10, 0),
-       end=period.get_period_to(2024, 10, 31, 10, 0)
-   )
+      # Modifica del periodo dell'evento periodico
+      period.change_period(
+          event_period,
+          start=period.get_period_from(2023, 8, 1, 10, 0),
+          end=period.get_period_to(2024, 10, 31, 10, 0)
+      )
    
-   # Modifica della descrizione dell'evento periodico
-   period.modify_period_description(
-       event_period,
-       new_description='My first event period modify'
-   )
+      # Modifica della descrizione dell'evento periodico
+      period.modify_period_description(
+          event_period,
+          new_description='My first event period modify'
+      )
    
-   # Attiva o disattiva l'evento periodico
-   period.switch_do_period(event_period)
+      # Attiva o disattiva l'evento periodico
+      period.switch_do_period(event_period)
 
 10. **Utilizzo della Classe per Inserire Eventi nel Diario**
    
-   ```sh
-   
-   pdated_diary = put_event_diary(existing_or_new_diary, event)
+      ```sh
+      
+      pdated_diary = put_event_diary(existing_or_new_diary, event)
 
 11. **Utilizzo del modulo diary_txt**
 Consente di stampare tutti gli eventi inseriti nel diario in un documento .txt
    
-   ```sh
-   converted_str = convert_diary_str()
+      ```sh
+      converted_str = convert_diary_str()
 
 12. **Utilizzo del modulo diary_excell**
 Consente di creare un file xlsx per registrare tutti gli eventi inseriti nel diario
    
-   ```sh
-   diary.diary_excel.save_diary_excel('excel_angelo.xlsx',d.diary)
+      ```sh
+      diary.diary_excel.save_diary_excel('excel_angelo.xlsx',d.diary)
 
 13. **Ordinamento eventi diario per nome o per data**
+      ```sh
+      import diary_DB
+      
+      connection = diary.diary.diary_DB.create_connection('localhost', 'Diary', 'root', 'root')
+      order = 'crescente'
+      list_events = read_events_DB(connection, id_diary=None)
+      list_events = orderby_startdata(list_events, order)
+
+    
+14. **Ordinamento eventi diario per nome o per data**
+   
    ```sh
    import diary_DB
-   
+      
    connection = diary.diary.diary_DB.create_connection('localhost', 'Diary', 'root', 'root')
-   order = 'crescente'
-   list_events = read_events_DB(connection, id_diary=None)
-   list_events = orderby_startdata(list_events, order)
-
-
+   
+   id_diary =  '65592250285068942839'
+   id_event = '3541791985364674716'
+   
+   delete_event_DB(connection,id_diary,id_event)

@@ -142,3 +142,18 @@ def read_events_DB(connection, id_diary=None):
         }
         for row in rows
     ]
+
+def delete_event_DB(connection, id_diary,univoc_id):
+    """
+    Metodo che permettte di eliminare eventi dal diario in base al id diario e id evento
+    :param connection: Connessione al database
+    :param id_diary: id del diario di riferimento
+    :param univoc_id: id univoco dell'evento del diario
+    :return: None
+    """
+    cursor = connection.cursor()
+    query = "DELETE FROM Event WHERE id_diary = %s AND univoc_id = %s"
+    cursor.execute(query, (id_diary, univoc_id))
+    connection.commit()
+    cursor.close()
+

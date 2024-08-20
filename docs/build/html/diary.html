@@ -146,6 +146,16 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="diary.diary_DB.delete_event_DB">
+<span class="sig-prename descclassname"><span class="pre">diary.diary_DB.</span></span><span class="sig-name descname"><span class="pre">delete_event_DB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_diary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">univoc_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.delete_event_DB" title="Link to this definition">¶</a></dt>
+<dd><p>Metodo che permettte di eliminare eventi dal diario in base al id diario e id evento
+:param connection: Connessione al database
+:param id_diary: id del diario di riferimento
+:param univoc_id: id univoco dell’evento del diario
+:return: None</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="diary.diary_DB.read_events_DB">
 <span class="sig-prename descclassname"><span class="pre">diary.diary_DB.</span></span><span class="sig-name descname"><span class="pre">read_events_DB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_diary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#diary.diary_DB.read_events_DB" title="Link to this definition">¶</a></dt>
 <dd><p>Legge gli eventi di un diario dal database.
