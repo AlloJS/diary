@@ -15,7 +15,6 @@ def _set_data_creation():
     time_zone = tz.gettz('Europe/Paris')
     return datetime.datetime.now(tz=time_zone)
 
-
 def create_diary(name):
     """
     Crea un nuovo diario con nome e altre informazioni base.
@@ -28,7 +27,6 @@ def create_diary(name):
         'date_creation': _set_data_creation(),
         'id_diary': _generate_random_id(),
     }
-
 
 def put_event_diary(diary, event):
     """
@@ -83,16 +81,8 @@ def orderby_startdata(diary, order):
         raise ErrorAllowedValue('I valori consentiti sono solo crescente o decrescente')
 
     reverse = True if order == 'decrescente' else False
-
-
-    # Verifica che diary sia una lista di dizionari
-    print(f"Tipo di 'diary': {type(diary)}")
-    print(f"Contenuto di 'diary': {diary}")
-
-    # Procedi con l'ordinamento
     diary = sorted(diary, key=lambda x: x['date_start'], reverse=reverse)
     return diary
-
 
 def orderby_name_event(diary, order):
     """

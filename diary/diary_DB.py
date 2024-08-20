@@ -54,7 +54,6 @@ def start_diary(connection,name=None, id_diary=None):
         }
         return existing_diary
 
-
 def read_is_diary_exist(connection):
     """
     Legge e verifica se un diario è già stato registrato.
@@ -83,7 +82,6 @@ def write_DB_diary_creation(connection, diary):
     connection.commit()
     cursor.close()
 
-
 def write_events_DB(connection, event):
     """
     Scrive gli eventi di un diario nel database.
@@ -104,10 +102,9 @@ def write_events_DB(connection, event):
         event['date_and'],
         event['do'],
         event['repeat'],
-        event['calendar'][0]  # Se 'calendar' è una lista, prendi il primo elemento
+        event['calendar'][0]
     )
 
-    # Esegui la query
     cursor.execute(query, values)
     connection.commit()
     cursor.close()
