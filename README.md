@@ -48,8 +48,12 @@ La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di 
 
    ```sh
    from diary.diary import Diary
+   connection = create_connection('localhost', 'Diary', 'root', 'root')
    
-   d = Diary('<Name diary>')
+   try:
+       existing_or_new_diary = start_diary(connection,id_diary='98286892737048743')
+   except ValueError as e:
+       print(e)
 
 7. **Utilizzo del modulo daily per gestire eventi giornalieri**
    
@@ -156,13 +160,13 @@ La libreria `diary` fornisce strumenti per creare, modificare e gestire voci di 
    
    ```sh
    
-   d.put_event_diary(my_event)
+   pdated_diary = put_event_diary(existing_or_new_diary, event)
 
 11. **Utilizzo del modulo diary_txt**
 Consente di stampare tutti gli eventi inseriti nel diario in un documento .txt
    
    ```sh
-   d.convert_diary_str()
+   converted_str = convert_diary_str()
 
 12. **Utilizzo del modulo diary_excell**
 Consente di creare un file xlsx per registrare tutti gli eventi inseriti nel diario
@@ -172,36 +176,11 @@ Consente di creare un file xlsx per registrare tutti gli eventi inseriti nel dia
 
 13. **Ordinamento eventi diario per nome o per data**
    ```sh
-   from diary import Diario
-   from event import Evento
-   from datetime import datetime
+   import diary_DB
    
-   # Crea l'oggetto Diario
-   my_diary = Diario()
-   
-   # Aggiungi alcuni eventi
-   my_diary.aggiungi_evento(Evento('Meeting', 'Discuss project', datetime(2024, 8, 15, 10, 0), datetime(2024, 8, 15, 11, 0)))
-   my_diary.aggiungi_evento(Evento('Dentist', 'Teeth check-up', datetime(2024, 8, 16, 9, 0), datetime(2024, 8, 16, 10, 0)))
-   my_diary.aggiungi_evento(Evento('Lunch', 'Lunch with friends', datetime(2024, 8, 14, 12, 0), datetime(2024, 8, 14, 13, 0)))
-   
-   # Ordina gli eventi per data di inizio in ordine crescente
-   my_diary.orderby_startdata(order='crescente')
-   for evento in my_diary.get_all_events():
-       print(evento.title, evento.date_start)
-   
-   # Ordina gli eventi per data di inizio in ordine decrescente
-   my_diary.orderby_startdata(order='decrescente')
-   for evento in my_diary.get_all_events():
-       print(evento.title, evento.date_start)
-   
-   # Ordina gli eventi per nome in ordine crescente
-   my_diary.orderby_name_event(order='crescente')
-   for evento in my_diary.get_all_events():
-       print(evento.title)
-   
-   # Ordina gli eventi per nome in ordine decrescente
-   my_diary.orderby_name_event(order='decrescente')
-   for evento in my_diary.get_all_events():
-       print(evento.title)
+   connection = diary.diary.diary_DB.create_connection('localhost', 'Diary', 'root', 'root')
+   order = 'crescente'
+   list_events = read_events_DB(connection, id_diary=None)
+   list_events = orderby_startdata(list_events, order)
 
 
