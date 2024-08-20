@@ -50,7 +50,7 @@ def convert_diary_str(diary):
     str_diary = ''
     for event in diary['diary']:
         try:
-            data_start_parsed = datetime.datetime.strptime(event['date start'], '%Y-%m-%d %H:%M:%S')
+            data_start_parsed = datetime.datetime.strptime(event['date_start'], '%Y-%m-%d %H:%M:%S')
             dsf = datetime.datetime.strftime(data_start_parsed, '%d %B %Y %H:%M:%S')
             data_and_parsed = datetime.datetime.strptime(event['date and'], '%Y-%m-%d %H:%M:%S')
             daf = datetime.datetime.strftime(data_and_parsed, '%d %B %Y %H:%M:%S')
@@ -82,8 +82,15 @@ def orderby_startdata(diary, order):
     if order not in ['crescente', 'decrescente']:
         raise ErrorAllowedValue('I valori consentiti sono solo crescente o decrescente')
 
-    verse = order == 'decrescente'
-    diary['diary'] = sorted(diary['diary'], key=lambda x: x['date start'], reverse=verse)
+    reverse = True if order == 'decrescente' else False
+
+
+    # Verifica che diary sia una lista di dizionari
+    print(f"Tipo di 'diary': {type(diary)}")
+    print(f"Contenuto di 'diary': {diary}")
+
+    # Procedi con l'ordinamento
+    diary = sorted(diary, key=lambda x: x['date_start'], reverse=reverse)
     return diary
 
 

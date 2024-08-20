@@ -8,7 +8,7 @@ connection = create_connection('localhost', 'Diary', 'root', 'root')
 # Crea un nuovo diario
 # Creare o selezionare un diario
 try:
-    existing_or_new_diary = start_diary(connection,id_diary='914232431004399226187')
+    existing_or_new_diary = start_diary(connection,id_diary='98286892737048743')
 except ValueError as e:
     print(e)
     # Potresti voler gestire la creazione di un nuovo diario in questo caso
@@ -18,4 +18,4 @@ event = daily_note('Meeting404', 'Discussione importante', 2024, 8, 20, 15, 30, 
 updated_diary = put_event_diary(existing_or_new_diary, event)
 
 # Scrivere l'evento nel database
-write_events_DB(connection, updated_diary)
+write_events_DB(connection, event)

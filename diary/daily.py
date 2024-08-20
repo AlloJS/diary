@@ -56,8 +56,8 @@ def daily_note(name,description,year,month,day,hour,minute,minut_duration,do,id_
             'id_diary': id_diary,
             'name': name,
             'description': description,
-            'date start': date_start,
-            'date and': date_and,
+            'date_start': date_start,
+            'date_and': date_and,
             'do': do,
             'repeat': False,
             'calendar': [calendar.month(year, month)]
@@ -103,8 +103,8 @@ def modify_daily_date(obj_daily, year, month, day,hour,minute,minut_duration):
         d_e = d_d + datetime.timedelta(minutes=minut_duration)
         date_and = datetime.datetime.strftime(d_e, '%Y-%m-%d %H:%M:%S')
         obj_daily['calendar'] = [calendar.month(year, month)]
-        obj_daily['date start'] = date_diary
-        obj_daily['date and'] = date_and
+        obj_daily['date_start'] = date_diary
+        obj_daily['date_and'] = date_and
         return obj_daily
 
     except ErrorDate as ed:

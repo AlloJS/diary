@@ -66,8 +66,8 @@ def test_period_note():
         'id_diary' : obj_period['id_diary'],
         'name': name,
         'description': description,
-        'date start': date_from_format,
-        'date and': date_to_format,
+        'date_start': date_from_format,
+        'date_and': date_to_format,
         'do': do,
         'repeat': False,
         'calendar': calendar_period
@@ -107,8 +107,8 @@ def test_change_period():
                     calendar_period.append(calendar.month(year, month))
 
 
-    assert obj['date start'] == date_from_format
-    assert obj['date and'] == date_to_format
+    assert obj['date_start'] == date_from_format
+    assert obj['date_and'] == date_to_format
     assert obj['calendar'] == calendar_period
 
 

@@ -18,8 +18,8 @@ def test_monthly_note():
         'id_diary' : obj_monthly['id_diary'],
         'name': name,
         'description':description,
-        'date start': datetime.date.strftime(start_date, '%Y-%m-%d %H:%M:%S'),
-        'date and': datetime.date.strftime(and_date, '%Y-%m-%d %H:%M:%S'),
+        'date_start': datetime.date.strftime(start_date, '%Y-%m-%d %H:%M:%S'),
+        'date_and': datetime.date.strftime(and_date, '%Y-%m-%d %H:%M:%S'),
         'do': do,
         'repeat': False,
         'calendar': [calendar.month(year, month)]
@@ -44,8 +44,8 @@ def test_modify_monthly_month():
     start_date = datetime.date(new_year,new_month,1)
     end_date = datetime.date(new_year,new_month,calendar.monthrange(new_year,new_month)[1])
 
-    assert expected_result['date start'] == datetime.date.strftime(start_date, '%Y-%m-%d %H:%M:%S')
-    assert expected_result['date and'] == datetime.date.strftime(end_date, '%Y-%m-%d %H:%M:%S')
+    assert expected_result['date_start'] == datetime.date.strftime(start_date, '%Y-%m-%d %H:%M:%S')
+    assert expected_result['date_and'] == datetime.date.strftime(end_date, '%Y-%m-%d %H:%M:%S')
 
 
 def test_modify_monthly_description():

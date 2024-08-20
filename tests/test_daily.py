@@ -23,8 +23,8 @@ def test_daily_note():
         'id_diary': obj_daily['id_diary'],
         'name': name,
         'description': description,
-        'date start': start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
-        'date and': end_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+        'date_start': start_datetime.strftime('%Y-%m-%d %H:%M:%S'),
+        'date_and': end_datetime.strftime('%Y-%m-%d %H:%M:%S'),
         'do': do,
         'repeat': False,
         'calendar': [calendar.month(year, month)]
@@ -63,8 +63,8 @@ def test_modify_daily_date():
         'id_diary': obj_daily['id_diary'],
         'name': name,
         'description': description,
-        'date start': start_datetime2.strftime('%Y-%m-%d %H:%M:%S'),
-        'date and': end_datetime2.strftime('%Y-%m-%d %H:%M:%S'),
+        'date_start': start_datetime2.strftime('%Y-%m-%d %H:%M:%S'),
+        'date_and': end_datetime2.strftime('%Y-%m-%d %H:%M:%S'),
         'do': do,
         'repeat': False,
         'calendar': [calendar.month(year_change, month_hange)]

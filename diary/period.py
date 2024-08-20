@@ -135,8 +135,8 @@ def period_note(name,description,period_from: dict,period_to: dict,do,id_diary):
             'id_diary': id_diary,
             'name': name,
             'description': description,
-            'date start': date_from_format,
-            'date and': date_to_format,
+            'date_start': date_from_format,
+            'date_and': date_to_format,
             'do': do,
             'repeat': False,
             'calendar': calendar_period
@@ -191,8 +191,8 @@ def change_period(obj_period,period_from,period_to):
                     for month in range(1, period_to['month'] + 1):
                         calendar_period.append(calendar.month(year, month))
 
-        obj_period['date start'] = date_from_format
-        obj_period['date and'] = date_to_format
+        obj_period['date_start'] = date_from_format
+        obj_period['date_and'] = date_to_format
         obj_period['calendar'] = calendar_period
         return obj_period
     except ErrorDate as ed:

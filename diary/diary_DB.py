@@ -84,7 +84,7 @@ def write_DB_diary_creation(connection, diary):
     cursor.close()
 
 
-def write_events_DB(connection, diary):
+def write_events_DB(connection, event):
     """
     Scrive gli eventi di un diario nel database.
     :param connection: Connessione al database.
@@ -95,20 +95,21 @@ def write_events_DB(connection, diary):
         INSERT INTO Event (univoc_id, id_diary, name, description, date_start, date_and, do, repeat_event, calendar)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
-    for event in diary['diary']:
-        values = (
-            event['univoc_id'],
-            event['id_diary'],
-            event['name'],
-            event['description'],
-            event['date start'],
-            event['date and'],
-            event['do'],
-            event.get('repeat_event', 0),
-            event['calendar'][0]
-        )
-        cursor.execute(query, values)
-        connection.commit()
+    values = (
+        event['univoc_id'],
+        event['id_diary'],
+        event['name'],
+        event['description'],
+        event['date_start'],
+        event['date_and'],
+        event['do'],
+        event['repeat'],
+        event['calendar'][0]  # Se 'calendar' è una lista, prendi il primo elemento
+    )
+
+    # Esegui la query
+    cursor.execute(query, values)
+    connection.commit()
     cursor.close()
 
 
@@ -136,8 +137,8 @@ def read_events_DB(connection, id_diary=None):
             'id_diary': row[2],
             'name': row[3],
             'description': row[4],
-            'date start': row[5],
-            'date and': row[6],
+            'date_start': datetime.strftime(row[5],'%Y-%m-%d %H:%M:%S'),
+            'date_and': datetime.strftime(row[6],'%Y-%m-%d %H:%M:%S'),
             'do': row[7],
             'repeat': row[8],
             'calendar': [row[9]]

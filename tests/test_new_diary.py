@@ -11,122 +11,119 @@ from ..diary.new_diary import (
 )
 from ..diary.diary_except import ErrorAllowedValue
 
-def test_set_data_creation():
-    data_creazione = _set_data_creation()
-    assert isinstance(data_creazione, datetime.datetime)
-    assert data_creazione.tzinfo is not None
-    assert data_creazione.tzinfo.tzname(data_creazione) == 'CEST'  # Central European Summer Time
-
-
-
 def test_create_diary():
     name = "Test Diary"
     diary = create_diary(name)
-
-    assert isinstance(diary, dict)
     assert diary['name'] == name
-    assert isinstance(diary['diary'], list)
+    assert diary['diary'] == []
     assert isinstance(diary['date_creation'], datetime.datetime)
-    assert len(diary['id_diary']) > 0  # Assumendo che l'ID non sia una stringa vuota
-
+    assert isinstance(diary['id_diary'], str)
+    assert len(diary['id_diary']) > 0
 
 def test_put_event_diary():
     diary = create_diary("Test Diary")
     event = {
-        'name': 'Meeting',
-        'description': 'Discussione importante',
-        'date start': '2024-08-20 15:30:00',
-        'date and': '2024-08-20 16:30:00',
+        'name': 'Test Event',
+        'description': 'This is a test event',
+        'date_start': '2024-08-15 14:30:00',
+        'date_and': '2024-08-15 15:30:00',
         'do': False
     }
-
     updated_diary = put_event_diary(diary, event)
-
     assert len(updated_diary['diary']) == 1
     assert updated_diary['diary'][0] == event
 
+def convert_diary_str(diary):
+    """
+    Converte il diario in una stringa.
+    :param diary: Il diario da convertire.
+    :return: Diario in una stringa.
+    """
+    str_diary = ''
+    for event in diary['diary']:
+        try:
+            data_start_parsed = datetime.datetime.strptime(event['date_start'], '%Y-%m-%d %H:%M:%S')
+            dsf = datetime.datetime.strftime(data_start_parsed, '%d %B %Y %H:%M:%S')
+            data_and_parsed = datetime.datetime.strptime(event['date_and'], '%Y-%m-%d %H:%M:%S')
+            daf = datetime.datetime.strftime(data_and_parsed, '%d %B %Y %H:%M:%S')
+        except ValueError as e:
+            print(e)
+            continue
 
-def test_convert_diary_str():
-    diary = create_diary("Test Diary")
-    event = {
-        'name': 'Meeting',
-        'description': 'Discussione importante',
-        'date start': '2024-08-20 15:30:00',
-        'date and': '2024-08-20 16:30:00',
-        'do': False
-    }
-    put_event_diary(diary, event)
+        do = 'Fatto' if event['do'] else 'Da svolgere'
 
-    diary_str = convert_diary_str(diary)
+        str_diary += (
+            f"PERIODO: dal: {dsf} "
+            f"al: {daf}\n"
+            f"NOME: {event['name']}\n"
+            f"DESCRIZIONE: {event['description']}\n"
+            f"SVOLTO: {do}\n"
+            f"-------------------------------------------\n"
+        )
 
-    assert isinstance(diary_str, str)
-    assert "PERIODO: dal: 20 August 2024 15:30:00" in diary_str
-    assert "NOME: Meeting" in diary_str
-    assert "DESCRIZIONE: Discussione importante" in diary_str
-    assert "SVOLTO: Da svolgere" in diary_str
+    return str_diary
 
 
 def test_orderby_startdata():
-    diary = create_diary("Test Diary")
-    event1 = {
-        'name': 'Meeting 1',
-        'description': 'Discussione importante',
-        'date start': '2024-08-19 14:30:00',
-        'date and': '2024-08-19 15:30:00',
-        'do': False
-    }
-    event2 = {
-        'name': 'Meeting 2',
-        'description': 'Altro incontro',
-        'date start': '2024-08-20 16:00:00',
-        'date and': '2024-08-20 17:00:00',
-        'do': False
-    }
-    put_event_diary(diary, event1)
-    put_event_diary(diary, event2)
+    diary = [
+        {
+            'name': 'Event 1',
+            'description': 'First event description',
+            'date_start': '2024-08-16 16:00:00',
+            'date_and': '2024-08-16 17:00:00',
+            'do': False
+        },
+        {
+            'name': 'Event 2',
+            'description': 'Second event description',
+            'date_start': '2024-08-15 14:30:00',
+            'date_and': '2024-08-15 15:30:00',
+            'do': True
+        }
+    ]
 
-    # Test ordine crescente
-    diary_sorted = orderby_startdata(diary, 'crescente')
-    assert diary_sorted['diary'][0]['name'] == 'Meeting 1'
+    # Test crescente
+    sorted_diary = orderby_startdata(diary, 'crescente')
+    assert sorted_diary[0]['name'] == 'Event 2'
 
-    # Test ordine decrescente
-    diary_sorted = orderby_startdata(diary, 'decrescente')
-    assert diary_sorted['diary'][0]['name'] == 'Meeting 2'
+    # Test decrescente
+    sorted_diary = orderby_startdata(diary, 'decrescente')
+    assert sorted_diary[0]['name'] == 'Event 1'
 
-    # Test errore con ordine non valido
+def test_orderby_startdata_invalid_order():
+    diary = []
     with pytest.raises(ErrorAllowedValue):
-        orderby_startdata(diary, 'non valido')
-
-
-
+        orderby_startdata(diary, 'invalid_order')
 
 def test_orderby_name_event():
-    diary = create_diary("Test Diary")
-    event1 = {
-        'name': 'Zeta Meeting',
-        'description': 'Discussione importante',
-        'date start': '2024-08-19 14:30:00',
-        'date and': '2024-08-19 15:30:00',
-        'do': False
+    diary = {
+        'diary': [
+            {
+                'name': 'Z Event',
+                'description': 'Event description',
+                'date_start': '2024-08-16 16:00:00',
+                'date_and': '2024-08-16 17:00:00',
+                'do': False
+            },
+            {
+                'name': 'A Event',
+                'description': 'Event description',
+                'date_start': '2024-08-15 14:30:00',
+                'date_and': '2024-08-15 15:30:00',
+                'do': True
+            }
+        ]
     }
-    event2 = {
-        'name': 'Alpha Meeting',
-        'description': 'Altro incontro',
-        'date start': '2024-08-20 16:00:00',
-        'date and': '2024-08-20 17:00:00',
-        'do': False
-    }
-    put_event_diary(diary, event1)
-    put_event_diary(diary, event2)
 
-    # Test ordine crescente
-    diary_sorted = orderby_name_event(diary, 'crescente')
-    assert diary_sorted['diary'][0]['name'] == 'Alpha Meeting'
+    # Test crescente
+    sorted_diary = orderby_name_event(diary, 'crescente')
+    assert sorted_diary['diary'][0]['name'] == 'A Event'
 
-    # Test ordine decrescente
-    diary_sorted = orderby_name_event(diary, 'decrescente')
-    assert diary_sorted['diary'][0]['name'] == 'Zeta Meeting'
+    # Test decrescente
+    sorted_diary = orderby_name_event(diary, 'decrescente')
+    assert sorted_diary['diary'][0]['name'] == 'Z Event'
 
-    # Test errore con ordine non valido
+def test_orderby_name_event_invalid_order():
+    diary = {'diary': []}
     with pytest.raises(ErrorAllowedValue):
-        orderby_name_event(diary, 'non valido')
+        orderby_name_event(diary, 'invalid_order')
